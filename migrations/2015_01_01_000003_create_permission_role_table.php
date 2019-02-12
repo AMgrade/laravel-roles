@@ -28,11 +28,13 @@ class CreatePermissionUserTable extends Migration
     /**
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create($this->table, function (Blueprint $table) {
             $table->unsignedInteger('permission_id')->index();
             $table->unsignedInteger('user_id')->index();
+
+            $table->unique(['permission_id', 'user_id']);
 
             $table->foreign('permission_id')
                 ->references('id')
@@ -49,7 +51,7 @@ class CreatePermissionUserTable extends Migration
     /**
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists($this->table);
     }

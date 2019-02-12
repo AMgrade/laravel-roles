@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use McMatters\LaravelRoles\Models\Role;
 use const false, null, true;
-use function array_map, explode, is_array, is_int, is_numeric, is_string;
+use function array_map, class_uses, explode, in_array, is_array, is_int, is_numeric, is_string;
 
 /**
  * Trait HasRole
@@ -98,7 +98,12 @@ trait HasRole
      */
     public function flushRoles(): void
     {
+        $this->unsetRelation('roles');
         $this->roles = null;
+
+        if (in_array(HasRole::class, class_uses($this), true)) {
+            $this->flushPermissions();
+        }
     }
 
     /**
@@ -154,7 +159,7 @@ trait HasRole
      */
     public function levelAccess(): int
     {
-        return $this->getRoles()->max('level') ?: 0;
+        return (int) ($this->getRoles()->max('level') ?: 0);
     }
 
     /**

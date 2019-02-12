@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace McMatters\LaravelRoles\Traits;
 
+use Countable;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -12,7 +14,7 @@ use Illuminate\Support\Facades\Config;
 use McMatters\LaravelRoles\Models\Permission;
 use McMatters\LaravelRoles\Models\Role;
 use const false, null, true;
-use function class_uses, in_array, is_int, is_numeric, is_string;
+use function class_uses, count, in_array, is_array, is_int, is_numeric, is_string;
 
 /**
  * Trait HasPermission
@@ -47,6 +49,7 @@ trait HasPermission
      * @param bool $touch
      *
      * @return void
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function attachPermission($permission, bool $touch = true): void
     {
@@ -64,6 +67,9 @@ trait HasPermission
     /**
      * @param mixed $permission
      * @param bool $touch
+     *
+     * @return void
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function detachPermission($permission = null, bool $touch = true): void
     {
@@ -81,6 +87,9 @@ trait HasPermission
     /**
      * @param mixed $permissions
      * @param bool $detaching
+     *
+     * @return void
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function syncPermissions($permissions, bool $detaching = true): void
     {
@@ -116,6 +125,7 @@ trait HasPermission
      */
     public function flushPermissions(): void
     {
+        $this->unsetRelation('permissions');
         $this->permissions = null;
     }
 
@@ -147,6 +157,7 @@ trait HasPermission
      * @param mixed $permissions
      *
      * @return bool
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function hasPermissions($permissions): bool
     {
@@ -167,6 +178,7 @@ trait HasPermission
      * @param mixed $permissions
      *
      * @return bool
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function hasAnyPermission($permissions): bool
     {
@@ -188,11 +200,24 @@ trait HasPermission
      * @param bool $load
      *
      * @return array
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function parsePermissions($permissions, bool $load = false): array
     {
         if ($permissions instanceof Collection) {
-            return $permissions->all();
+            return $permissions->map(function ($permission) {
+                if (is_int($permission)) {
+                    return Permission::query()->findOrFail($permission);
+                }
+
+                if (is_string($permission)) {
+                    return Permission::query()
+                        ->where('name', $permission)
+                        ->firstOrFail();
+                }
+
+                return $permission;
+            })->all();
         }
 
         if (is_string($permissions)) {
@@ -203,13 +228,29 @@ trait HasPermission
             return Arr::wrap($permissions);
         }
 
+        if (is_int($permissions)) {
+            return [Permission::query()->findOrFail($permissions)];
+        }
+
         $firstElement = Arr::first((array) $permissions);
 
         if (is_numeric($firstElement)) {
-            return Permission::query()->whereKey($permissions)->get()->all();
+            $permissionCollection = Permission::query()
+                ->whereKey($permissions)
+                ->get();
+        } else {
+            $permissionCollection = Permission::query()
+                ->whereIn('name', $permissions)
+                ->get();
         }
 
-        return Permission::query()->whereIn('name', $permissions)->get()->all();
+        if ((is_array($permissions) || $permissions instanceof Countable) &&
+            count($permissions) > $permissionCollection->count()
+        ) {
+            throw (new ModelNotFoundException())->setModel(Permission::class);
+        }
+
+        return $permissionCollection->all();
     }
 
     /**
