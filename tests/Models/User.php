@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace McMatters\LaravelRoles\Tests\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;

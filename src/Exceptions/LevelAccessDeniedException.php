@@ -18,6 +18,6 @@ class LevelAccessDeniedException extends Exception
      */
     public function __construct()
     {
-        parent::__construct('You don\'t have a required level access');
+        parent::__construct('You don\'t have a required access level');
     }
 }

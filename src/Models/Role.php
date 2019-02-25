@@ -27,6 +27,14 @@ class Role extends Model
     ];
 
     /**
+     * @var array
+     */
+    protected $casts = [
+        'name' => 'string',
+        'level' => 'int',
+    ];
+
+    /**
      * Role constructor.
      *
      * @param array $attributes

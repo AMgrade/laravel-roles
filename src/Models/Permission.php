@@ -27,6 +27,14 @@ class Permission extends Model
     ];
 
     /**
+     * @var array
+     */
+    protected $casts = [
+        'name' => 'string',
+        'description' => 'string',
+    ];
+
+    /**
      * Permission constructor.
      *
      * @param array $attributes

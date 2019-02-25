@@ -2,10 +2,10 @@
 
 declare(strict_types = 1);
 
-/** @var Illuminate\Database\Eloquent\Factory $factory */
-
 use Faker\Generator;
 use McMatters\LaravelRoles\Tests\Models\User;
+
+/** @var Illuminate\Database\Eloquent\Factory $factory */
 
 $factory->define(User::class, function (Generator $faker) {
     return [

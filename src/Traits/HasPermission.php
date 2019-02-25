@@ -24,7 +24,7 @@ use function class_uses, count, in_array, is_array, is_int, is_numeric, is_strin
 trait HasPermission
 {
     /**
-     * @var EloquentCollection|null
+     * @var \Illuminate\Database\Eloquent\Collection|null
      */
     protected $permissions;
 
@@ -102,7 +102,7 @@ trait HasPermission
     }
 
     /**
-     * @return EloquentCollection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getPermissions(): EloquentCollection
     {
@@ -254,7 +254,7 @@ trait HasPermission
     }
 
     /**
-     * @return EloquentCollection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     protected function getRolePermissions(): EloquentCollection
     {
