@@ -101,7 +101,7 @@ trait HasRole
         $this->unsetRelation('roles');
         $this->roles = null;
 
-        if (in_array(HasRole::class, class_uses($this), true)) {
+        if (in_array(HasPermission::class, class_uses($this), true)) {
             $this->flushPermissions();
         }
     }
