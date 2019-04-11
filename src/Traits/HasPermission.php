@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Config;
 use McMatters\LaravelRoles\Models\Permission;
 use McMatters\LaravelRoles\Models\Role;
 use const false, null, true;
-use function class_uses, count, in_array, is_array, is_int, is_numeric, is_string, method_exists;
+use function class_uses, count, in_array, is_array, is_int, is_numeric, is_string;
 
 /**
  * Trait HasPermission
@@ -282,9 +282,11 @@ trait HasPermission
                 $roleModel->getQualifiedKeyName(),
                 $isThisRole ? [$this->getKey()] : $this->getRoles()->modelKeys()
             )
-            ->when(method_exists($this, 'levelAccess'), function ($q) use ($roleModel) {
-                $q->orWhere("{$roleModel->getTable()}.level", '<', $this->levelAccess());
-            })
+            ->orWhere(
+                "{$roleModel->getTable()}.level",
+                '<',
+                $isThisRole ? $this->getAttribute('level') : $this->levelAccess()
+            )
             ->get(["{$permissionModel->getTable()}.*"]);
     }
 }

@@ -33,12 +33,12 @@ class PermissionsTest extends TestCase
         $this->assertCount(0, $this->getUserModerator()->getAttribute('permissions'));
         $this->assertCount(8, $this->getUserModerator()->getPermissions());
         $this->assertCount(5, $this->getRoleModerator()->getAttribute('permissions'));
-        $this->assertCount(5, $this->getRoleModerator()->getPermissions());
+        $this->assertCount(8, $this->getRoleModerator()->getPermissions());
 
         $this->assertCount(0, $this->getUserAdmin()->getAttribute('permissions'));
         $this->assertCount(10, $this->getUserAdmin()->getPermissions());
         $this->assertCount(2, $this->getRoleAdmin()->getAttribute('permissions'));
-        $this->assertCount(2, $this->getRoleAdmin()->getPermissions());
+        $this->assertCount(10, $this->getRoleAdmin()->getPermissions());
     }
 
     /**
@@ -140,9 +140,9 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleEditor()->hasPermission(9));
         $this->assertFalse($this->getRoleEditor()->hasPermission(10));
 
-        $this->assertFalse($this->getRoleModerator()->hasPermission(1));
-        $this->assertFalse($this->getRoleModerator()->hasPermission(2));
-        $this->assertFalse($this->getRoleModerator()->hasPermission(3));
+        $this->assertTrue($this->getRoleModerator()->hasPermission(1));
+        $this->assertTrue($this->getRoleModerator()->hasPermission(2));
+        $this->assertTrue($this->getRoleModerator()->hasPermission(3));
         $this->assertTrue($this->getRoleModerator()->hasPermission(4));
         $this->assertTrue($this->getRoleModerator()->hasPermission(5));
         $this->assertTrue($this->getRoleModerator()->hasPermission(6));
@@ -151,14 +151,14 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleModerator()->hasPermission(9));
         $this->assertFalse($this->getRoleModerator()->hasPermission(10));
 
-        $this->assertFalse($this->getRoleAdmin()->hasPermission(1));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission(2));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission(3));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission(4));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission(5));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission(6));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission(7));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission(8));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission(1));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission(2));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission(3));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission(4));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission(5));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission(6));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission(7));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission(8));
         $this->assertTrue($this->getRoleAdmin()->hasPermission(9));
         $this->assertTrue($this->getRoleAdmin()->hasPermission(10));
     }
@@ -215,9 +215,9 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleEditor()->hasPermission('settings.create'));
         $this->assertFalse($this->getRoleEditor()->hasPermission('settings.update'));
 
-        $this->assertFalse($this->getRoleModerator()->hasPermission('blog.create'));
-        $this->assertFalse($this->getRoleModerator()->hasPermission('blog.update'));
-        $this->assertFalse($this->getRoleModerator()->hasPermission('blog.delete'));
+        $this->assertTrue($this->getRoleModerator()->hasPermission('blog.create'));
+        $this->assertTrue($this->getRoleModerator()->hasPermission('blog.update'));
+        $this->assertTrue($this->getRoleModerator()->hasPermission('blog.delete'));
         $this->assertTrue($this->getRoleModerator()->hasPermission('comment.create'));
         $this->assertTrue($this->getRoleModerator()->hasPermission('comment.update'));
         $this->assertTrue($this->getRoleModerator()->hasPermission('comment.delete'));
@@ -226,14 +226,14 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleModerator()->hasPermission('settings.create'));
         $this->assertFalse($this->getRoleModerator()->hasPermission('settings.update'));
 
-        $this->assertFalse($this->getRoleAdmin()->hasPermission('blog.create'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission('blog.update'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission('blog.delete'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission('comment.create'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission('comment.update'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission('comment.delete'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission('comment.approve'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission('comment.disapprove'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission('blog.create'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission('blog.update'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission('blog.delete'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission('comment.create'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission('comment.update'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission('comment.delete'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission('comment.approve'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission('comment.disapprove'));
         $this->assertTrue($this->getRoleAdmin()->hasPermission('settings.create'));
         $this->assertTrue($this->getRoleAdmin()->hasPermission('settings.update'));
     }
@@ -290,9 +290,9 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleEditor()->hasPermission($this->getPermission('settings.create')));
         $this->assertFalse($this->getRoleEditor()->hasPermission($this->getPermission('settings.update')));
 
-        $this->assertFalse($this->getRoleModerator()->hasPermission($this->getPermission('blog.create')));
-        $this->assertFalse($this->getRoleModerator()->hasPermission($this->getPermission('blog.update')));
-        $this->assertFalse($this->getRoleModerator()->hasPermission($this->getPermission('blog.delete')));
+        $this->assertTrue($this->getRoleModerator()->hasPermission($this->getPermission('blog.create')));
+        $this->assertTrue($this->getRoleModerator()->hasPermission($this->getPermission('blog.update')));
+        $this->assertTrue($this->getRoleModerator()->hasPermission($this->getPermission('blog.delete')));
         $this->assertTrue($this->getRoleModerator()->hasPermission($this->getPermission('comment.create')));
         $this->assertTrue($this->getRoleModerator()->hasPermission($this->getPermission('comment.update')));
         $this->assertTrue($this->getRoleModerator()->hasPermission($this->getPermission('comment.delete')));
@@ -301,14 +301,14 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleModerator()->hasPermission($this->getPermission('settings.create')));
         $this->assertFalse($this->getRoleModerator()->hasPermission($this->getPermission('settings.update')));
 
-        $this->assertFalse($this->getRoleAdmin()->hasPermission($this->getPermission('blog.create')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission($this->getPermission('blog.update')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission($this->getPermission('blog.delete')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission($this->getPermission('comment.create')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission($this->getPermission('comment.update')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission($this->getPermission('comment.delete')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission($this->getPermission('comment.approve')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermission($this->getPermission('comment.disapprove')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('blog.create')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('blog.update')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('blog.delete')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('comment.create')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('comment.update')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('comment.delete')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('comment.approve')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('comment.disapprove')));
         $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('settings.create')));
         $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('settings.update')));
     }
@@ -389,11 +389,11 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasPermissions([9, 10]));
         $this->assertTrue($this->getRoleAdmin()->hasPermissions(new Collection([9])));
         $this->assertTrue($this->getRoleAdmin()->hasPermissions(new Collection([9, 10])));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions(7));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions([1, 2, 3, 7]));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions([4, 5, 6]));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions(new Collection([1, 2, 3])));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions(new Collection([4, 5])));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions(7));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions([1, 2, 3, 7]));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions([4, 5, 6]));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions(new Collection([1, 2, 3])));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions(new Collection([4, 5])));
     }
 
     /**
@@ -451,9 +451,9 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleEditor()->hasPermissions('settings.create'));
         $this->assertFalse($this->getRoleEditor()->hasPermissions('settings.update'));
 
-        $this->assertFalse($this->getRoleModerator()->hasPermissions('blog.create'));
-        $this->assertFalse($this->getRoleModerator()->hasPermissions('blog.update'));
-        $this->assertFalse($this->getRoleModerator()->hasPermissions('blog.delete'));
+        $this->assertTrue($this->getRoleModerator()->hasPermissions('blog.create'));
+        $this->assertTrue($this->getRoleModerator()->hasPermissions('blog.update'));
+        $this->assertTrue($this->getRoleModerator()->hasPermissions('blog.delete'));
         $this->assertTrue($this->getRoleModerator()->hasPermissions('comment.create'));
         $this->assertTrue($this->getRoleModerator()->hasPermissions('comment.update'));
         $this->assertTrue($this->getRoleModerator()->hasPermissions('comment.delete'));
@@ -462,14 +462,14 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleModerator()->hasPermissions('settings.create'));
         $this->assertFalse($this->getRoleModerator()->hasPermissions('settings.update'));
 
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions('blog.create'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions('blog.update'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions('blog.delete'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions('comment.create'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions('comment.update'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions('comment.delete'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions('comment.approve'));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions('comment.disapprove'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions('blog.create'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions('blog.update'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions('blog.delete'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions('comment.create'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions('comment.update'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions('comment.delete'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions('comment.approve'));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions('comment.disapprove'));
         $this->assertTrue($this->getRoleAdmin()->hasPermissions('settings.create'));
         $this->assertTrue($this->getRoleAdmin()->hasPermissions('settings.update'));
     }
@@ -527,9 +527,9 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleEditor()->hasPermissions($this->getPermission('settings.create')));
         $this->assertFalse($this->getRoleEditor()->hasPermissions($this->getPermission('settings.update')));
 
-        $this->assertFalse($this->getRoleModerator()->hasPermissions($this->getPermission('blog.create')));
-        $this->assertFalse($this->getRoleModerator()->hasPermissions($this->getPermission('blog.update')));
-        $this->assertFalse($this->getRoleModerator()->hasPermissions($this->getPermission('blog.delete')));
+        $this->assertTrue($this->getRoleModerator()->hasPermissions($this->getPermission('blog.create')));
+        $this->assertTrue($this->getRoleModerator()->hasPermissions($this->getPermission('blog.update')));
+        $this->assertTrue($this->getRoleModerator()->hasPermissions($this->getPermission('blog.delete')));
         $this->assertTrue($this->getRoleModerator()->hasPermissions($this->getPermission('comment.create')));
         $this->assertTrue($this->getRoleModerator()->hasPermissions($this->getPermission('comment.update')));
         $this->assertTrue($this->getRoleModerator()->hasPermissions($this->getPermission('comment.delete')));
@@ -538,14 +538,14 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleModerator()->hasPermissions($this->getPermission('settings.create')));
         $this->assertFalse($this->getRoleModerator()->hasPermissions($this->getPermission('settings.update')));
 
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions($this->getPermission('blog.create')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions($this->getPermission('blog.update')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions($this->getPermission('blog.delete')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.create')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.update')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.delete')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.approve')));
-        $this->assertFalse($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.disapprove')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('blog.create')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('blog.update')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('blog.delete')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.create')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.update')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.delete')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.approve')));
+        $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('comment.disapprove')));
         $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('settings.create')));
         $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('settings.update')));
     }
@@ -595,15 +595,15 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission([4]));
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission([4, 5, 6, 7, 8]));
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission(new Collection([4, 5, 6, 7, 8])));
-        $this->assertFalse($this->getRoleModerator()->hasAnyPermission([1, 2, 3, 9, 10]));
-        $this->assertFalse($this->getRoleModerator()->hasAnyPermission(new Collection([1, 2, 3, 9, 10])));
+        $this->assertFalse($this->getRoleModerator()->hasAnyPermission([9, 10]));
+        $this->assertFalse($this->getRoleModerator()->hasAnyPermission(new Collection([9, 10])));
 
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission(9));
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission([9]));
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission([4, 5, 6, 7, 8, 9]));
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission(new Collection([4, 5, 6, 7, 8, 9])));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission([1, 2, 3, 6, 7]));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission(new Collection([1, 2, 3, 6, 7])));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission([1, 2, 3, 6, 7]));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission(new Collection([1, 2, 3, 6, 7])));
     }
 
     /**
@@ -658,7 +658,7 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleEditor()->hasAnyPermission('settings.create'));
         $this->assertFalse($this->getRoleEditor()->hasAnyPermission('settings.create|settings.update'));
 
-        $this->assertFalse($this->getRoleModerator()->hasAnyPermission('blog.create|blog.update|blog.delete'));
+        $this->assertTrue($this->getRoleModerator()->hasAnyPermission('blog.create|blog.update|blog.delete'));
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission(['comment.create', 'comment.update', 'comment.delete']));
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission(new Collection(['comment.create', 'comment.update', 'comment.delete'])));
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission(new Collection('comment.approve')));
@@ -666,11 +666,11 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleModerator()->hasAnyPermission('settings.create'));
         $this->assertFalse($this->getRoleModerator()->hasAnyPermission('settings.create|settings.update'));
 
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission('blog.create|blog.update|blog.delete'));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission(['comment.create', 'comment.update', 'comment.delete']));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission(new Collection(['comment.create', 'comment.update', 'comment.delete'])));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission(new Collection('comment.approve')));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission('comment.disapprove'));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission('blog.create|blog.update|blog.delete'));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission(['comment.create', 'comment.update', 'comment.delete']));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission(new Collection(['comment.create', 'comment.update', 'comment.delete'])));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission(new Collection('comment.approve')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission('comment.disapprove'));
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission('settings.create'));
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission('settings.create|settings.update'));
     }
@@ -728,9 +728,9 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleEditor()->hasAnyPermission($this->getPermission('settings.create')));
         $this->assertFalse($this->getRoleEditor()->hasAnyPermission($this->getPermission('settings.update')));
 
-        $this->assertFalse($this->getRoleModerator()->hasAnyPermission($this->getPermission('blog.create')));
-        $this->assertFalse($this->getRoleModerator()->hasAnyPermission($this->getPermission('blog.update')));
-        $this->assertFalse($this->getRoleModerator()->hasAnyPermission($this->getPermission('blog.delete')));
+        $this->assertTrue($this->getRoleModerator()->hasAnyPermission($this->getPermission('blog.create')));
+        $this->assertTrue($this->getRoleModerator()->hasAnyPermission($this->getPermission('blog.update')));
+        $this->assertTrue($this->getRoleModerator()->hasAnyPermission($this->getPermission('blog.delete')));
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission($this->getPermission('comment.create')));
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission($this->getPermission('comment.update')));
         $this->assertTrue($this->getRoleModerator()->hasAnyPermission($this->getPermission('comment.delete')));
@@ -739,14 +739,14 @@ class PermissionsTest extends TestCase
         $this->assertFalse($this->getRoleModerator()->hasAnyPermission($this->getPermission('settings.create')));
         $this->assertFalse($this->getRoleModerator()->hasAnyPermission($this->getPermission('settings.update')));
 
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission($this->getPermission('blog.create')));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission($this->getPermission('blog.update')));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission($this->getPermission('blog.delete')));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.create')));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.update')));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.delete')));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.approve')));
-        $this->assertFalse($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.disapprove')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('blog.create')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('blog.update')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('blog.delete')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.create')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.update')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.delete')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.approve')));
+        $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('comment.disapprove')));
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('settings.create')));
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission($this->getPermission('settings.update')));
     }
