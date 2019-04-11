@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Config;
 use McMatters\LaravelRoles\Models\Permission;
 use McMatters\LaravelRoles\Models\Role;
 use const false, null, true;
-use function class_uses, count, in_array, is_array, is_int, is_numeric, is_string;
+use function class_uses, count, in_array, is_array, is_int, is_numeric, is_string, method_exists;
 
 /**
  * Trait HasPermission
@@ -110,7 +110,7 @@ trait HasPermission
             /** @var EloquentCollection $permissions */
             $permissions = $this->getAttribute('permissions');
 
-            if (in_array(HasRole::class, class_uses($this), true)) {
+            if ($this instanceof Role || in_array(HasRole::class, class_uses($this), true)) {
                 $permissions = $permissions->merge($this->getRolePermissions());
             }
 
@@ -258,8 +258,10 @@ trait HasPermission
      */
     protected function getRolePermissions(): EloquentCollection
     {
+        $isThisRole = $this instanceof Role;
+
         $permissionModel = new Permission();
-        $roleModel = new Role();
+        $roleModel = $isThisRole ? $this : new Role();
 
         $permissionRoleTable = Config::get('roles.tables.permission_role');
 
@@ -276,8 +278,13 @@ trait HasPermission
                 '=',
                 "{$permissionRoleTable}.role_id"
             )
-            ->whereIn($roleModel->getQualifiedKeyName(), $this->getRoles()->modelKeys())
-            ->orWhere("{$roleModel->getTable()}.level", '<', $this->levelAccess())
+            ->whereIn(
+                $roleModel->getQualifiedKeyName(),
+                $isThisRole ? [$this->getKey()] : $this->getRoles()->modelKeys()
+            )
+            ->when(method_exists($this, 'levelAccess'), function ($q) use ($roleModel) {
+                $q->orWhere("{$roleModel->getTable()}.level", '<', $this->levelAccess());
+            })
             ->get(["{$permissionModel->getTable()}.*"]);
     }
 }
