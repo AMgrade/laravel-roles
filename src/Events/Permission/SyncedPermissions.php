@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use const null;
 
 /**
- * Class SyncingPermissions
+ * Class SyncedPermissions
  *
  * @package McMatters\LaravelRoles\Events\Permission
  */
-class SyncingPermissions
+class SyncedPermissions
 {
     /**
      * @var \Illuminate\Database\Eloquent\Model
@@ -25,7 +25,7 @@ class SyncingPermissions
     public $permissions;
 
     /**
-     * SyncingPermissions constructor.
+     * SyncedPermissions constructor.
      *
      * @param \Illuminate\Database\Eloquent\Model $model
      * @param int[]|null $permissions

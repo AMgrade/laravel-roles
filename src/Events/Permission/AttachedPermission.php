@@ -5,14 +5,13 @@ declare(strict_types = 1);
 namespace McMatters\LaravelRoles\Events\Permission;
 
 use Illuminate\Database\Eloquent\Model;
-use const null;
 
 /**
- * Class SyncingPermissions
+ * Class AttachedPermission
  *
  * @package McMatters\LaravelRoles\Events\Permission
  */
-class SyncingPermissions
+class AttachedPermission
 {
     /**
      * @var \Illuminate\Database\Eloquent\Model
@@ -20,17 +19,17 @@ class SyncingPermissions
     public $model;
 
     /**
-     * @var int[]|null
+     * @var int[]
      */
     public $permissions;
 
     /**
-     * SyncingPermissions constructor.
+     * AttachedPermission constructor.
      *
      * @param \Illuminate\Database\Eloquent\Model $model
-     * @param int[]|null $permissions
+     * @param int[] $permissions
      */
-    public function __construct(Model $model, array $permissions = null)
+    public function __construct(Model $model, array $permissions)
     {
         $this->model = $model;
         $this->permissions = $permissions;
