@@ -86,6 +86,26 @@ class PermissionsTest extends TestCase
         $user->detachPermission(new Collection([4, 8]));
         $this->assertCount(0, $user->getAttribute('permissions'));
         $this->assertCount(0, $user->getPermissions());
+
+        $user->syncPermissions([1, 2]);
+        $this->assertCount(2, $user->getAttribute('permissions'));
+        $this->assertCount(2, $user->getPermissions());
+
+        $user->syncPermissions([3], false);
+        $this->assertCount(3, $user->getAttribute('permissions'));
+        $this->assertCount(3, $user->getPermissions());
+
+        $user->syncPermissions($this->getPermission('blog.create'));
+        $this->assertCount(1, $user->getAttribute('permissions'));
+        $this->assertCount(1, $user->getPermissions());
+
+        $user->syncPermissions([$this->getPermission('blog.create')]);
+        $this->assertCount(1, $user->getAttribute('permissions'));
+        $this->assertCount(1, $user->getPermissions());
+
+        $user->syncPermissions(new Collection([$this->getPermission('blog.create')]));
+        $this->assertCount(1, $user->getAttribute('permissions'));
+        $this->assertCount(1, $user->getPermissions());
     }
 
     /**

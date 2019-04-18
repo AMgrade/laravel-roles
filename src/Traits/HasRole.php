@@ -7,7 +7,11 @@ namespace McMatters\LaravelRoles\Traits;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Event;
 use InvalidArgumentException;
+use McMatters\LaravelRoles\Events\Role\AttachingRole;
+use McMatters\LaravelRoles\Events\Role\DetachingRole;
+use McMatters\LaravelRoles\Events\Role\SyncingRole;
 use McMatters\LaravelRoles\Models\Role;
 use const false, null, true;
 use function array_map, class_uses, explode, in_array, is_array, is_int, is_numeric, is_string;
@@ -42,7 +46,11 @@ trait HasRole
      */
     public function attachRole($role, bool $touch = true): void
     {
-        $this->roles()->attach($this->parseRoles($role), [], $touch);
+        $roles = $this->parseRoles($role);
+
+        Event::dispatch(new AttachingRole($this, $roles));
+
+        $this->roles()->attach($roles, [], $touch);
 
         $this->flushRoles();
     }
@@ -61,6 +69,8 @@ trait HasRole
             $role = $this->parseRoles($role);
         }
 
+        Event::dispatch(new DetachingRole($this, $role));
+
         $this->roles()->detach($role, $touch);
 
         $this->flushRoles();
@@ -76,7 +86,11 @@ trait HasRole
      */
     public function syncRoles($roles, bool $detaching = true): void
     {
-        $this->roles()->sync($this->parseRoles($roles), $detaching);
+        $roles = $this->parseRoles($roles);
+
+        Event::dispatch(new SyncingRole($this, $roles));
+
+        $this->roles()->sync($roles, $detaching);
 
         $this->flushRoles();
     }

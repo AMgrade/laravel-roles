@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Event;
+use McMatters\LaravelRoles\Events\Permission\AttachingPermission;
+use McMatters\LaravelRoles\Events\Permission\DetachingPermission;
+use McMatters\LaravelRoles\Events\Permission\SyncingPermissions;
 use McMatters\LaravelRoles\Models\Permission;
 use McMatters\LaravelRoles\Models\Role;
 use const false, null, true;
@@ -53,13 +57,13 @@ trait HasPermission
      */
     public function attachPermission($permission, bool $touch = true): void
     {
-        $this->permissions()->attach(
-            (new EloquentCollection())->merge(
-                $this->parsePermissions($permission, true)
-            ),
-            [],
-            $touch
-        );
+        $permissions = (new EloquentCollection())->merge(
+            $this->parsePermissions($permission, true)
+        )->modelKeys();
+
+        Event::dispatch(new AttachingPermission($this, $permissions));
+
+        $this->permissions()->attach($permissions, [], $touch);
 
         $this->flushPermissions();
     }
@@ -76,8 +80,10 @@ trait HasPermission
         if (null !== $permission) {
             $permission = (new EloquentCollection())->merge(
                 $this->parsePermissions($permission, true)
-            );
+            )->modelKeys();
         }
+
+        Event::dispatch(new DetachingPermission($this, $permission));
 
         $this->permissions()->detach($permission, $touch);
 
@@ -93,10 +99,13 @@ trait HasPermission
      */
     public function syncPermissions($permissions, bool $detaching = true): void
     {
-        $this->permissions()->sync(
-            $this->parsePermissions($permissions),
-            $detaching
-        );
+        $permissions = (new EloquentCollection())->merge(
+            $this->parsePermissions($permissions, true)
+        )->modelKeys();
+
+        Event::dispatch(new SyncingPermissions($this, $permissions));
+
+        $this->permissions()->sync($permissions, $detaching);
 
         $this->flushPermissions();
     }
@@ -137,7 +146,7 @@ trait HasPermission
     public function hasPermission($permission): bool
     {
         return $this->getPermissions()->contains(
-            function (Permission $model) use ($permission) {
+            static function (Permission $model) use ($permission) {
                 if (is_int($permission) || is_numeric($permission)) {
                     return (int) $permission === $model->getKey();
                 }
@@ -205,7 +214,7 @@ trait HasPermission
     protected function parsePermissions($permissions, bool $load = false): array
     {
         if ($permissions instanceof Collection) {
-            return $permissions->map(function ($permission) {
+            return $permissions->map(static function ($permission) {
                 if (is_int($permission)) {
                     return Permission::query()->findOrFail($permission);
                 }
@@ -238,6 +247,8 @@ trait HasPermission
             $permissionCollection = Permission::query()
                 ->whereKey($permissions)
                 ->get();
+        } elseif ($firstElement instanceof Permission) {
+            $permissionCollection = (new EloquentCollection())->merge((array) $permissions);
         } else {
             $permissionCollection = Permission::query()
                 ->whereIn('name', $permissions)
