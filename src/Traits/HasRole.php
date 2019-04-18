@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Event;
 use InvalidArgumentException;
 use McMatters\LaravelRoles\Events\Role\AttachingRole;
 use McMatters\LaravelRoles\Events\Role\DetachingRole;
-use McMatters\LaravelRoles\Events\Role\SyncingRole;
+use McMatters\LaravelRoles\Events\Role\SyncingRoles;
 use McMatters\LaravelRoles\Models\Role;
 use const false, null, true;
 use function array_map, class_uses, explode, in_array, is_array, is_int, is_numeric, is_string;
@@ -88,7 +88,7 @@ trait HasRole
     {
         $roles = $this->parseRoles($roles);
 
-        Event::dispatch(new SyncingRole($this, $roles));
+        Event::dispatch(new SyncingRoles($this, $roles));
 
         $this->roles()->sync($roles, $detaching);
 
