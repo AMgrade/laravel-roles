@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace McMatters\LaravelRoles;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use function method_exists;
 
@@ -41,15 +40,21 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function registerBladeDirectives(): void
     {
-        Blade::if('role', function ($role) {
+        /** @var \Illuminate\View\Compilers\BladeCompiler $blade */
+        $blade = $this->app->make('view')
+            ->getEngineResolver()
+            ->resolve('blade')
+            ->getCompiler();
+
+        $blade->if('role', function ($role) {
             return Auth::check() && Auth::user()->hasRoles($role);
         });
 
-        Blade::if('permission', function ($permission) {
+        $blade->if('permission', function ($permission) {
             return Auth::check() && Auth::user()->hasPermissions($permission);
         });
 
-        Blade::if('level', function ($level) {
+        $blade->if('level', function ($level) {
             return Auth::check() && Auth::user()->levelAccess() >= $level;
         });
     }
