@@ -31,8 +31,8 @@ class CreatePermissionUserTable extends Migration
     public function up(): void
     {
         Schema::create($this->table, function (Blueprint $table) {
-            $table->unsignedInteger('permission_id')->index();
-            $table->unsignedInteger('user_id')->index();
+            $table->unsignedBigInteger('permission_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
 
             $table->unique(['permission_id', 'user_id']);
 

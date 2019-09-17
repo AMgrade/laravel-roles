@@ -15,7 +15,7 @@ use McMatters\LaravelRoles\Traits\HasRole;
  */
 class User extends Authenticatable
 {
-    use HasRole, HasPermission;
+    use HasPermission, HasRole;
 
     /**
      * @var array

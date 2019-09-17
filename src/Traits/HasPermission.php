@@ -20,8 +20,10 @@ use McMatters\LaravelRoles\Events\Permission\SyncedPermissions;
 use McMatters\LaravelRoles\Events\Permission\SyncingPermissions;
 use McMatters\LaravelRoles\Models\Permission;
 use McMatters\LaravelRoles\Models\Role;
-use const false, null, true;
+
 use function class_uses, count, in_array, is_array, is_int, is_numeric, is_string;
+
+use const false, null, true;
 
 /**
  * Trait HasPermission
@@ -44,10 +46,10 @@ trait HasPermission
             Permission::class,
             null,
             null,
-            'permission_id',
             null,
+            $this->primaryKey,
             null,
-            'permissions'
+            __FUNCTION__
         );
     }
 
@@ -56,6 +58,7 @@ trait HasPermission
      * @param bool $touch
      *
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function attachPermission($permission, bool $touch = true): void
@@ -78,6 +81,7 @@ trait HasPermission
      * @param bool $touch
      *
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function detachPermission($permission = null, bool $touch = true): void
@@ -102,6 +106,7 @@ trait HasPermission
      * @param bool $detaching
      *
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function syncPermissions($permissions, bool $detaching = true): void
@@ -127,7 +132,7 @@ trait HasPermission
     public function getPermissions(): EloquentCollection
     {
         if (null === $this->permissions) {
-            /** @var EloquentCollection $permissions */
+            /** @var \Illuminate\Database\Eloquent\Collection $permissions */
             $permissions = $this->getAttribute('permissions');
 
             if ($this instanceof Role || in_array(HasRole::class, class_uses($this), true)) {
@@ -177,6 +182,7 @@ trait HasPermission
      * @param mixed $permissions
      *
      * @return bool
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function hasPermissions($permissions): bool
@@ -198,6 +204,7 @@ trait HasPermission
      * @param mixed $permissions
      *
      * @return bool
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function hasAnyPermission($permissions): bool
@@ -220,6 +227,7 @@ trait HasPermission
      * @param bool $load
      *
      * @return array
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function parsePermissions($permissions, bool $load = false): array

@@ -7,8 +7,10 @@ namespace McMatters\LaravelRoles\Tests\Traits;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use McMatters\LaravelRoles\Models\Permission;
-use const null;
+
 use function func_get_args, is_array;
+
+use const null;
 
 /**
  * Trait PermissionsTrait
@@ -21,6 +23,7 @@ trait PermissionsTrait
      * @param array|string $name
      *
      * @return \McMatters\LaravelRoles\Models\Permission
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getPermission(string $name): Permission
@@ -31,8 +34,8 @@ trait PermissionsTrait
             $cache = Permission::all()->keyBy('name');
         }
 
-        return $cache->get($name, function () {
-            throw new ModelNotFoundException();
+        return $cache->get($name, static function () {
+            throw (new ModelNotFoundException())->setModel(Permission::class);
         });
     }
 
@@ -40,6 +43,7 @@ trait PermissionsTrait
      * @param array|string $names
      *
      * @return \Illuminate\Database\Eloquent\Collection
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getPermissions($names): Collection

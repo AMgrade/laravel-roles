@@ -6,6 +6,7 @@ namespace McMatters\LaravelRoles;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+
 use function method_exists;
 
 /**

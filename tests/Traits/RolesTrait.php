@@ -6,6 +6,7 @@ namespace McMatters\LaravelRoles\Tests\Traits;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use McMatters\LaravelRoles\Models\Role;
+
 use const null;
 
 /**
@@ -19,6 +20,7 @@ trait RolesTrait
      * @param string $role
      *
      * @return \McMatters\LaravelRoles\Models\Role
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getRole(string $role): Role
@@ -29,13 +31,14 @@ trait RolesTrait
             $cache = Role::all()->keyBy('name');
         }
 
-        return $cache->get($role, function () {
-            throw new ModelNotFoundException();
+        return $cache->get($role, static function () {
+            throw (new ModelNotFoundException())->setModel(Role::class);
         });
     }
 
     /**
      * @return \McMatters\LaravelRoles\Models\Role
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getRoleAdmin(): Role
@@ -45,6 +48,7 @@ trait RolesTrait
 
     /**
      * @return \McMatters\LaravelRoles\Models\Role
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getRoleModerator(): Role
@@ -54,6 +58,7 @@ trait RolesTrait
 
     /**
      * @return \McMatters\LaravelRoles\Models\Role
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getRoleEditor(): Role

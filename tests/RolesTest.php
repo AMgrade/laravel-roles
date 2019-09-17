@@ -15,6 +15,7 @@ class RolesTest extends TestCase
 {
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -40,6 +41,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -62,6 +64,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -84,6 +87,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -106,6 +110,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -128,6 +133,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -150,6 +156,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -196,6 +203,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -245,6 +253,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -275,6 +284,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -335,6 +345,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -370,6 +381,7 @@ class RolesTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException

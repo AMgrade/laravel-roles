@@ -18,6 +18,7 @@ class UserRolePermissionSeeder extends Seeder
 {
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -34,14 +35,14 @@ class UserRolePermissionSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         foreach ($this->getData() as $role => $permissions) {
-            /** @var Role $roleModel */
+            /** @var \McMatters\LaravelRoles\Models\Role $roleModel */
             $roleModel = Role::query()->create([
                 'name' => $role,
                 'level' => ++$i,
             ]);
 
             foreach ($permissions as $permission) {
-                /** @var Permission $permissionModel */
+                /** @var \McMatters\LaravelRoles\Models\Permission $permissionModel */
                 $permissionModel = Permission::query()->create([
                     'name' => $permission,
                 ]);
@@ -49,7 +50,7 @@ class UserRolePermissionSeeder extends Seeder
                 $roleModel->attachPermission($permissionModel);
             }
 
-            /** @var User $user */
+            /** @var \McMatters\LaravelRoles\Tests\Models\User $user */
             $user = User::query()->create([
                 'name' => $role,
                 'email' => "{$role}@example.com",

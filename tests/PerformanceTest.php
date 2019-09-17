@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace McMatters\LaravelRoles\Tests;
 
 use Illuminate\Support\Facades\DB;
+
 use const false, true;
 
 /**
@@ -26,6 +27,7 @@ class PerformanceTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -45,6 +47,7 @@ class PerformanceTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -64,6 +67,7 @@ class PerformanceTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Mockery\Exception\NoMatchingExpectationException
      */
     protected function setUp(): void

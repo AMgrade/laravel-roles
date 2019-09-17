@@ -21,6 +21,7 @@ class Permission
      * @param mixed $permission
      *
      * @return mixed
+     *
      * @throws \McMatters\LaravelRoles\Exceptions\PermissionDeniedException
      */
     public function handle(Request $request, Closure $next, $permission)

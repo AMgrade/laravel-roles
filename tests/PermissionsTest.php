@@ -6,6 +6,7 @@ namespace McMatters\LaravelRoles\Tests;
 
 use Illuminate\Support\Collection;
 use McMatters\LaravelRoles\Tests\Traits\PermissionsTrait;
+
 use function range;
 
 /**
@@ -19,6 +20,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -43,6 +45,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      * @throws \PHPUnit\Framework\ExpectationFailedException
@@ -110,6 +113,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -185,6 +189,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -260,6 +265,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -335,6 +341,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -418,6 +425,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -496,6 +504,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -572,6 +581,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -628,6 +638,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -697,6 +708,7 @@ class PermissionsTest extends TestCase
 
     /**
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException

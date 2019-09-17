@@ -21,6 +21,7 @@ class Level
      * @param int|string $level
      *
      * @return mixed
+     *
      * @throws \McMatters\LaravelRoles\Exceptions\LevelAccessDeniedException
      */
     public function handle(Request $request, Closure $next, $level)

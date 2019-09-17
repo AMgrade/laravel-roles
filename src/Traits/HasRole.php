@@ -16,8 +16,10 @@ use McMatters\LaravelRoles\Events\Role\DetachingRole;
 use McMatters\LaravelRoles\Events\Role\SyncedRoles;
 use McMatters\LaravelRoles\Events\Role\SyncingRoles;
 use McMatters\LaravelRoles\Models\Role;
-use const false, null, true;
+
 use function array_map, class_uses, explode, in_array, is_array, is_int, is_numeric, is_string;
+
+use const false, null, true;
 
 /**
  * Trait HasRole
@@ -44,6 +46,7 @@ trait HasRole
      * @param bool $touch
      *
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -65,6 +68,7 @@ trait HasRole
      * @param bool $touch
      *
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -88,6 +92,7 @@ trait HasRole
      * @param bool $detaching
      *
      * @return void
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -135,6 +140,7 @@ trait HasRole
      * @param mixed $role
      *
      * @return bool
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -147,6 +153,7 @@ trait HasRole
      * @param mixed $roles
      *
      * @return bool
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -165,6 +172,7 @@ trait HasRole
      * @param mixed $roles
      *
      * @return bool
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -191,6 +199,7 @@ trait HasRole
      * @param int|string|\McMatters\LaravelRoles\Models\Role $role
      *
      * @return int
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */
@@ -218,6 +227,7 @@ trait HasRole
      * @param mixed $roles
      *
      * @return array
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \InvalidArgumentException
      */

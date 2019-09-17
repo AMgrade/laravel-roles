@@ -6,8 +6,10 @@ namespace McMatters\LaravelRoles\Tests\Traits;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use McMatters\LaravelRoles\Tests\Models\User;
-use const null;
+
 use function factory;
+
+use const null;
 
 /**
  * Trait UsersTrait
@@ -28,6 +30,7 @@ trait UsersTrait
      * @param string $name
      *
      * @return \McMatters\LaravelRoles\Tests\Models\User
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getUser(string $name): User
@@ -38,13 +41,14 @@ trait UsersTrait
             $cache = User::all()->keyBy('name');
         }
 
-        return $cache->get($name, function () {
-            throw new ModelNotFoundException();
+        return $cache->get($name, static function () {
+            throw (new ModelNotFoundException())->setModel(User::class);
         });
     }
 
     /**
      * @return \McMatters\LaravelRoles\Tests\Models\User
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getUserAdmin(): User
@@ -54,6 +58,7 @@ trait UsersTrait
 
     /**
      * @return \McMatters\LaravelRoles\Tests\Models\User
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getUserModerator(): User
@@ -63,6 +68,7 @@ trait UsersTrait
 
     /**
      * @return \McMatters\LaravelRoles\Tests\Models\User
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     protected function getUserEditor(): User

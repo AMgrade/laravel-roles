@@ -21,6 +21,7 @@ class Role
      * @param mixed $role
      *
      * @return mixed
+     *
      * @throws \McMatters\LaravelRoles\Exceptions\RoleDeniedException
      */
     public function handle(Request $request, Closure $next, $role)

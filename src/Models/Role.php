@@ -53,7 +53,12 @@ class Role extends Model
     {
         return $this->belongsToMany(
             Permission::class,
-            Config::get('roles.tables.permission_role')
+            Config::get('roles.tables.permission_role'),
+            null,
+            null,
+            $this->primaryKey,
+            null,
+            __FUNCTION__
         );
     }
 
@@ -64,7 +69,12 @@ class Role extends Model
     {
         return $this->belongsToMany(
             Config::get('roles.models.user'),
-            Config::get('roles.tables.role_user')
+            Config::get('roles.tables.role_user'),
+            null,
+            null,
+            $this->primaryKey,
+            null,
+            __FUNCTION__
         );
     }
 }

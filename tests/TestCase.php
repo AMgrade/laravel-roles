@@ -9,6 +9,7 @@ use McMatters\LaravelRoles\Tests\Models\User;
 use McMatters\LaravelRoles\Tests\Traits\RolesTrait;
 use McMatters\LaravelRoles\Tests\Traits\UsersTrait;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+
 use function realpath;
 
 /**
@@ -22,6 +23,7 @@ class TestCase extends BaseTestCase
 
     /**
      * @return void
+     *
      * @throws \Mockery\Exception\NoMatchingExpectationException
      */
     protected function setUp(): void

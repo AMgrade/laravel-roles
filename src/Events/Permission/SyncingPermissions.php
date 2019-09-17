@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace McMatters\LaravelRoles\Events\Permission;
 
 use Illuminate\Database\Eloquent\Model;
+
 use const null;
 
 /**
