@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\LaravelRoles;
 
@@ -47,15 +47,15 @@ class ServiceProvider extends BaseServiceProvider
             ->resolve('blade')
             ->getCompiler();
 
-        $blade->if('role', function ($role) {
+        $blade->if('role', static function ($role) {
             return Auth::check() && Auth::user()->hasRoles($role);
         });
 
-        $blade->if('permission', function ($permission) {
+        $blade->if('permission', static function ($permission) {
             return Auth::check() && Auth::user()->hasPermissions($permission);
         });
 
-        $blade->if('level', function ($level) {
+        $blade->if('level', static function ($level) {
             return Auth::check() && Auth::user()->levelAccess() >= $level;
         });
     }

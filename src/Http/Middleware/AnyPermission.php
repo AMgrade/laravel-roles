@@ -1,12 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\LaravelRoles\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use McMatters\LaravelRoles\Exceptions\PermissionDeniedException;
+
+use const null;
 
 /**
  * Class AnyPermission
@@ -28,10 +30,10 @@ class AnyPermission
     {
         $user = $request->user();
 
-        if (!$user || !$user->hasAnyPermission($permissions)) {
-            throw new PermissionDeniedException();
+        if (null !== $user && $user->hasAnyPermission($permissions)) {
+            return $next($request);
         }
 
-        return $next($request);
+        throw new PermissionDeniedException();
     }
 }

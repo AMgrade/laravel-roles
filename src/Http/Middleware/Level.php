@@ -1,12 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\LaravelRoles\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use McMatters\LaravelRoles\Exceptions\LevelAccessDeniedException;
+
+use const null;
 
 /**
  * Class Level
@@ -28,10 +30,10 @@ class Level
     {
         $user = $request->user();
 
-        if (!$user || $user->levelAccess < $level) {
-            throw new LevelAccessDeniedException();
+        if (null !== $user && $user->levelAccess >= $level) {
+            return $next($request);
         }
 
-        return $next($request);
+        throw new LevelAccessDeniedException();
     }
 }

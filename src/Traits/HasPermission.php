@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\LaravelRoles\Traits;
 
@@ -84,8 +84,10 @@ trait HasPermission
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function detachPermission($permission = null, bool $touch = true): void
-    {
+    public function detachPermission(
+        $permission = null,
+        bool $touch = true
+    ): void {
         if (null !== $permission) {
             $permission = (new EloquentCollection())
                 ->merge($this->parsePermissions($permission, true))
@@ -135,7 +137,10 @@ trait HasPermission
             /** @var \Illuminate\Database\Eloquent\Collection $permissions */
             $permissions = $this->getAttribute('permissions');
 
-            if ($this instanceof Role || in_array(HasRole::class, class_uses($this), true)) {
+            if (
+                $this instanceof Role ||
+                in_array(HasRole::class, class_uses($this), true)
+            ) {
                 $permissions = $permissions->merge($this->getRolePermissions());
             }
 
@@ -233,19 +238,21 @@ trait HasPermission
     protected function parsePermissions($permissions, bool $load = false): array
     {
         if ($permissions instanceof Collection) {
-            return $permissions->map(static function ($permission) {
-                if (is_int($permission)) {
-                    return Permission::query()->findOrFail($permission);
-                }
+            return $permissions->map(
+                static function ($permission) {
+                    if (is_int($permission)) {
+                        return Permission::query()->findOrFail($permission);
+                    }
 
-                if (is_string($permission)) {
-                    return Permission::query()
-                        ->where('name', $permission)
-                        ->firstOrFail();
-                }
+                    if (is_string($permission)) {
+                        return Permission::query()
+                            ->where('name', $permission)
+                            ->firstOrFail();
+                    }
 
-                return $permission;
-            })->all();
+                    return $permission;
+                }
+            )->all();
         }
 
         if (is_string($permissions)) {
@@ -267,14 +274,17 @@ trait HasPermission
                 ->whereKey($permissions)
                 ->get();
         } elseif ($firstElement instanceof Permission) {
-            $permissionCollection = (new EloquentCollection())->merge((array) $permissions);
+            $permissionCollection = (new EloquentCollection())->merge(
+                (array) $permissions
+            );
         } else {
             $permissionCollection = Permission::query()
                 ->whereIn('name', $permissions)
                 ->get();
         }
 
-        if ((is_array($permissions) || $permissions instanceof Countable) &&
+        if (
+            (is_array($permissions) || $permissions instanceof Countable) &&
             count($permissions) > $permissionCollection->count()
         ) {
             throw (new ModelNotFoundException())->setModel(Permission::class);

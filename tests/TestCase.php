@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\LaravelRoles\Tests;
 
@@ -19,7 +19,8 @@ use function realpath;
  */
 class TestCase extends BaseTestCase
 {
-    use UsersTrait, RolesTrait;
+    use RolesTrait;
+    use UsersTrait;
 
     /**
      * @return void

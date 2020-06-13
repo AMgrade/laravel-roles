@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\LaravelRoles\Tests\Models;
 
@@ -15,7 +15,8 @@ use McMatters\LaravelRoles\Traits\HasRole;
  */
 class User extends Authenticatable
 {
-    use HasPermission, HasRole;
+    use HasPermission;
+    use HasRole;
 
     /**
      * @var array

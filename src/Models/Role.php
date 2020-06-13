@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Config;
 use McMatters\LaravelRoles\Traits\HasPermission;
 
+use const null;
+
 /**
  * Class Role
  *

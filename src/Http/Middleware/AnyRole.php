@@ -1,12 +1,14 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace McMatters\LaravelRoles\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use McMatters\LaravelRoles\Exceptions\RoleDeniedException;
+
+use const null;
 
 /**
  * Class AnyRole
@@ -28,10 +30,10 @@ class AnyRole
     {
         $user = $request->user();
 
-        if (!$user || !$user->hasAnyRole($roles)) {
-            throw new RoleDeniedException();
+        if (null !== $user && $user->hasAnyRole($roles)) {
+            return $next($request);
         }
 
-        return $next($request);
+        throw new RoleDeniedException();
     }
 }
