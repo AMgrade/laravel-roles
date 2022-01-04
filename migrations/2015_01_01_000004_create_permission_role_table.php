@@ -15,7 +15,7 @@ class CreatePermissionRoleTable extends Migration
     /**
      * @var string
      */
-    protected $table;
+    protected string $table;
 
     /**
      * CreatePermissionRoleTable constructor.

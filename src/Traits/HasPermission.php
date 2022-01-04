@@ -35,7 +35,7 @@ trait HasPermission
     /**
      * @var \Illuminate\Database\Eloquent\Collection|null
      */
-    protected $permissions;
+    protected ?Collection $permissions = null;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -49,7 +49,7 @@ trait HasPermission
             null,
             $this->primaryKey,
             null,
-            __FUNCTION__
+            __FUNCTION__,
         );
     }
 
@@ -176,9 +176,7 @@ trait HasPermission
                     return $model->getAttribute('name') === $permission;
                 }
 
-                return $permission instanceof Permission
-                    ? $model->is($permission)
-                    : false;
+                return $permission instanceof Permission && $model->is($permission);
             }
         );
     }

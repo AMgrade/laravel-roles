@@ -18,12 +18,12 @@ class DetachingPermission
     /**
      * @var \Illuminate\Database\Eloquent\Model
      */
-    public $model;
+    public Model $model;
 
     /**
      * @var int[]|null
      */
-    public $permissions;
+    public ?array $permissions;
 
     /**
      * DetachingPermission constructor.

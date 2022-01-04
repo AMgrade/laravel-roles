@@ -7,8 +7,6 @@ namespace McMatters\LaravelRoles\Tests\Traits;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use McMatters\LaravelRoles\Tests\Models\User;
 
-use function factory;
-
 use const null;
 
 /**
@@ -23,7 +21,7 @@ trait UsersTrait
      */
     protected function createUser(): User
     {
-        return factory(User::class, 1)->create()->first();
+        return User::factory()->count(1)->create()->first();
     }
 
     /**

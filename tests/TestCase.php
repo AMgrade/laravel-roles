@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace McMatters\LaravelRoles\Tests;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use McMatters\LaravelRoles\ServiceProvider;
+use McMatters\LaravelRoles\Tests\Database\Seeders\UserRolePermissionSeeder;
 use McMatters\LaravelRoles\Tests\Models\User;
 use McMatters\LaravelRoles\Tests\Traits\RolesTrait;
 use McMatters\LaravelRoles\Tests\Traits\UsersTrait;
@@ -31,11 +34,10 @@ class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->setupEloquentFactory();
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(realpath('migrations'));
-        $this->artisan('db:seed', ['--class' => 'UserRolePermissionSeeder'])->run();
-
-        $this->withFactories(realpath('tests/database/factories'));
+        $this->artisan('db:seed', ['--class' => UserRolePermissionSeeder::class])->run();
     }
 
     /**
@@ -65,5 +67,31 @@ class TestCase extends BaseTestCase
     protected function getPackageProviders($app): array
     {
         return [ServiceProvider::class];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getAnnotations(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return void
+     */
+    protected function setupEloquentFactory(): void
+    {
+        $namespace = 'McMatters\\LaravelRoles\\Tests\\Database\\Factories\\';
+
+        Factory::useNamespace($namespace);
+
+        Factory::guessFactoryNamesUsing(static function (string $modelName) use ($namespace) {
+            $modelName = Str::startsWith($modelName, __NAMESPACE__.'\\Models\\')
+                ? Str::after($modelName, __NAMESPACE__.'\\Models\\')
+                : Str::after($modelName, __NAMESPACE__);
+
+            return "{$namespace}{$modelName}Factory";
+        });
     }
 }

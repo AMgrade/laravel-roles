@@ -31,7 +31,7 @@ trait HasRole
     /**
      * @var \Illuminate\Database\Eloquent\Collection|null
      */
-    protected $roles;
+    protected ?Collection $roles = null;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

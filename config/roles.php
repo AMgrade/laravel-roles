@@ -15,6 +15,6 @@ return [
     ],
 
     'models' => [
-        'user' => 'App\User',
+        'user' => 'App\Models\User',
     ],
 ];

@@ -16,12 +16,12 @@ class AttachedRole
     /**
      * @var \Illuminate\Database\Eloquent\Model
      */
-    public $model;
+    public Model $model;
 
     /**
      * @var int[]
      */
-    public $roles;
+    public array $roles;
 
     /**
      * AttachedRole constructor.

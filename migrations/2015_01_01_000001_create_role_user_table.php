@@ -15,7 +15,7 @@ class CreateRoleUserTable extends Migration
     /**
      * @var string
      */
-    protected $table;
+    protected string $table;
 
     /**
      * CreateRoleUserTable constructor.

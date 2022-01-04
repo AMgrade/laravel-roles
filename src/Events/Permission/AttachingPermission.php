@@ -16,12 +16,12 @@ class AttachingPermission
     /**
      * @var \Illuminate\Database\Eloquent\Model
      */
-    public $model;
+    public Model $model;
 
     /**
      * @var int[]
      */
-    public $permissions;
+    public array $permissions;
 
     /**
      * AttachingPermission constructor.

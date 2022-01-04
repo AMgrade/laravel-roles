@@ -18,12 +18,12 @@ class DetachedRole
     /**
      * @var \Illuminate\Database\Eloquent\Model
      */
-    public $model;
+    public Model $model;
 
     /**
      * @var int[]|null
      */
-    public $roles;
+    public ?array $roles;
 
     /**
      * DetachedRole constructor.

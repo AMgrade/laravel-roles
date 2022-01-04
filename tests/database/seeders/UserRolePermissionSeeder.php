@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace McMatters\LaravelRoles\Tests\Database\Seeders;
+
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
@@ -13,6 +15,8 @@ use McMatters\LaravelRoles\Tests\Models\User;
 
 /**
  * Class UserRolePermissionSeeder
+ *
+ * @package McMatters\LaravelRoles\Tests\Database\Seeders
  */
 class UserRolePermissionSeeder extends Seeder
 {

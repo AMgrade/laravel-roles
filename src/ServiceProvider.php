@@ -51,8 +51,16 @@ class ServiceProvider extends BaseServiceProvider
             return Auth::check() && Auth::user()->hasRoles($role);
         });
 
+        $blade->if('anyrole', static function ($role) {
+            return Auth::check() && Auth::user()->hasAnyRole($role);
+        });
+
         $blade->if('permission', static function ($permission) {
             return Auth::check() && Auth::user()->hasPermissions($permission);
+        });
+
+        $blade->if('anypermission', static function ($permission) {
+            return Auth::check() && Auth::user()->hasAnyPermission($permission);
         });
 
         $blade->if('level', static function ($level) {

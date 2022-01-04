@@ -60,7 +60,7 @@ class Role extends Model
             null,
             $this->primaryKey,
             null,
-            __FUNCTION__
+            __FUNCTION__,
         );
     }
 
@@ -76,7 +76,7 @@ class Role extends Model
             null,
             $this->primaryKey,
             null,
-            __FUNCTION__
+            __FUNCTION__,
         );
     }
 }
