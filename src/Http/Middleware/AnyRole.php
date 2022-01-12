@@ -26,7 +26,7 @@ class AnyRole
      *
      * @throws \McMatters\LaravelRoles\Exceptions\RoleDeniedException
      */
-    public function handle(Request $request, Closure $next, $roles)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         $user = $request->user();
 

@@ -26,7 +26,7 @@ class AnyPermission
      *
      * @throws \McMatters\LaravelRoles\Exceptions\PermissionDeniedException
      */
-    public function handle(Request $request, Closure $next, $permissions)
+    public function handle(Request $request, Closure $next, ...$permissions)
     {
         $user = $request->user();
 
