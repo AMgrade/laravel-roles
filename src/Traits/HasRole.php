@@ -17,9 +17,18 @@ use McMatters\LaravelRoles\Events\Role\SyncedRoles;
 use McMatters\LaravelRoles\Events\Role\SyncingRoles;
 use McMatters\LaravelRoles\Models\Role;
 
-use function array_map, class_uses, explode, in_array, is_array, is_int, is_numeric, is_string;
+use function array_map;
+use function class_uses;
+use function explode;
+use function in_array;
+use function is_array;
+use function is_int;
+use function is_numeric;
+use function is_string;
 
-use const false, null, true;
+use const false;
+use const null;
+use const true;
 
 /**
  * Trait HasRole
@@ -250,9 +259,7 @@ trait HasRole
         }
 
         if (is_array($roles)) {
-            return array_map(function ($role) {
-                return $this->parseRole($role);
-            }, $roles);
+            return array_map(fn($role) => $this->parseRole($role), $roles);
         }
 
         throw new InvalidArgumentException('Invalid roles were passed');

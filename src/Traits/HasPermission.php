@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace McMatters\LaravelRoles\Traits;
 
-use Countable;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -21,9 +20,17 @@ use McMatters\LaravelRoles\Events\Permission\SyncingPermissions;
 use McMatters\LaravelRoles\Models\Permission;
 use McMatters\LaravelRoles\Models\Role;
 
-use function class_uses, count, in_array, is_array, is_int, is_numeric, is_string;
+use function class_uses;
+use function count;
+use function in_array;
+use function is_countable;
+use function is_int;
+use function is_numeric;
+use function is_string;
 
-use const false, null, true;
+use const false;
+use const null;
+use const true;
 
 /**
  * Trait HasPermission
@@ -273,7 +280,7 @@ trait HasPermission
                 ->get();
         } elseif ($firstElement instanceof Permission) {
             $permissionCollection = (new EloquentCollection())->merge(
-                (array) $permissions
+                (array) $permissions,
             );
         } else {
             $permissionCollection = Permission::query()
@@ -282,7 +289,7 @@ trait HasPermission
         }
 
         if (
-            (is_array($permissions) || $permissions instanceof Countable) &&
+            is_countable($permissions) &&
             count($permissions) > $permissionCollection->count()
         ) {
             throw (new ModelNotFoundException())->setModel(Permission::class);

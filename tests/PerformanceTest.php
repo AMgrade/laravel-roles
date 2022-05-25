@@ -6,7 +6,8 @@ namespace McMatters\LaravelRoles\Tests;
 
 use Illuminate\Support\Facades\DB;
 
-use const false, true;
+use const false;
+use const true;
 
 /**
  * Class PerformanceTest
@@ -18,12 +19,12 @@ class PerformanceTest extends TestCase
     /**
      * @var bool
      */
-    protected $listenerSetup = false;
+    protected bool $listenerSetup = false;
 
     /**
      * @var int
      */
-    protected $queryCount = 0;
+    protected int $queryCount = 0;
 
     /**
      * @return void

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use McMatters\LaravelRoles\Models\Permission;
 
-use function func_get_args, is_array;
+use function func_get_args;
+use function is_array;
 
 use const null;
 

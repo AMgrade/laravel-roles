@@ -18,6 +18,8 @@ class ServiceProvider extends BaseServiceProvider
 {
     /**
      * @return void
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function boot(): void
     {
@@ -38,6 +40,8 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * @return void
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function registerBladeDirectives(): void
     {
@@ -75,6 +79,6 @@ class ServiceProvider extends BaseServiceProvider
     {
         return method_exists($this->app, 'configPath')
             ? $this->app->configPath()
-            : $this->app->basePath().'/config';
+            : "{$this->app->basePath()}/config";
     }
 }

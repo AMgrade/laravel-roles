@@ -7,10 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * Class CreateRolesTable
- */
-class CreateRolesTable extends Migration
+return new class extends Migration
 {
     /**
      * @var string
@@ -18,7 +15,7 @@ class CreateRolesTable extends Migration
     protected string $table;
 
     /**
-     * CreateRolesTable constructor.
+     * @return void
      */
     public function __construct()
     {
@@ -31,7 +28,7 @@ class CreateRolesTable extends Migration
     public function up(): void
     {
         Schema::create($this->table, function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name')->unique();
             $table->unsignedSmallInteger('level')->default(1);
             $table->timestamps();
@@ -45,4 +42,4 @@ class CreateRolesTable extends Migration
     {
         Schema::dropIfExists($this->table);
     }
-}
+};

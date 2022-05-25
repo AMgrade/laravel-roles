@@ -7,10 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * Class CreatePermissionsTable
- */
-class CreatePermissionsTable extends Migration
+return new class extends Migration
 {
     /**
      * @var string
@@ -18,7 +15,7 @@ class CreatePermissionsTable extends Migration
     protected string $table;
 
     /**
-     * CreatePermissionsTable constructor.
+     * @return void
      */
     public function __construct()
     {
@@ -45,4 +42,4 @@ class CreatePermissionsTable extends Migration
     {
         Schema::dropIfExists($this->table);
     }
-}
+};
