@@ -9,20 +9,8 @@ use McMatters\LaravelRoles\Models\Role;
 
 use const null;
 
-/**
- * Trait RolesTrait
- *
- * @package McMatters\LaravelRoles\Tests\Traits
- */
 trait RolesTrait
 {
-    /**
-     * @param string $role
-     *
-     * @return \McMatters\LaravelRoles\Models\Role
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     protected function getRole(string $role): Role
     {
         static $cache;
@@ -36,31 +24,16 @@ trait RolesTrait
         });
     }
 
-    /**
-     * @return \McMatters\LaravelRoles\Models\Role
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     protected function getRoleAdmin(): Role
     {
         return $this->getRole('admin');
     }
 
-    /**
-     * @return \McMatters\LaravelRoles\Models\Role
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     protected function getRoleModerator(): Role
     {
         return $this->getRole('moderator');
     }
 
-    /**
-     * @return \McMatters\LaravelRoles\Models\Role
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     protected function getRoleEditor(): Role
     {
         return $this->getRole('editor');

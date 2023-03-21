@@ -8,29 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use const null;
 
-/**
- * Class DetachedPermission
- *
- * @package McMatters\LaravelRoles\Events\Permission
- */
 class DetachedPermission
 {
-    /**
-     * @var \Illuminate\Database\Eloquent\Model
-     */
     public Model $model;
 
-    /**
-     * @var int[]|null
-     */
     public ?array $permissions;
 
-    /**
-     * DetachedPermission constructor.
-     *
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param int[]|null $permissions
-     */
     public function __construct(Model $model, array $permissions = null)
     {
         $this->model = $model;

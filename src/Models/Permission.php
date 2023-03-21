@@ -11,36 +11,20 @@ use McMatters\LaravelRoles\Traits\HasRole;
 
 use const null;
 
-/**
- * Class Permission
- *
- * @package McMatters\LaravelRoles\Models
- */
 class Permission extends Model
 {
     use HasRole;
 
-    /**
-     * @var array
-     */
     protected $fillable = [
         'name',
         'description',
     ];
 
-    /**
-     * @var array
-     */
     protected $casts = [
         'name' => 'string',
         'description' => 'string',
     ];
 
-    /**
-     * Permission constructor.
-     *
-     * @param array $attributes
-     */
     public function __construct(array $attributes = [])
     {
         $this->table = Config::get('roles.tables.permissions');
@@ -48,9 +32,6 @@ class Permission extends Model
         parent::__construct($attributes);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -64,9 +45,6 @@ class Permission extends Model
         );
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(

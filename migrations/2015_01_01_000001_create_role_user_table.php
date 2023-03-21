@@ -9,22 +9,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * @var string
-     */
     protected string $table;
 
-    /**
-     * @return void
-     */
     public function __construct()
     {
         $this->table = Config::get('roles.tables.role_user');
     }
 
-    /**
-     * @return void
-     */
     public function up(): void
     {
         Schema::create($this->table, function (Blueprint $table) {
@@ -45,9 +36,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * @return void
-     */
     public function down(): void
     {
         Schema::dropIfExists($this->table);

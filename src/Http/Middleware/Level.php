@@ -10,22 +10,8 @@ use McMatters\LaravelRoles\Exceptions\LevelAccessDeniedException;
 
 use const null;
 
-/**
- * Class Level
- *
- * @package McMatters\LaravelRoles\Http\Middleware
- */
 class Level
 {
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @param int|string $level
-     *
-     * @return mixed
-     *
-     * @throws \McMatters\LaravelRoles\Exceptions\LevelAccessDeniedException
-     */
     public function handle(Request $request, Closure $next, $level)
     {
         $user = $request->user();

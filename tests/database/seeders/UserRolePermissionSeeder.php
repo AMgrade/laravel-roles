@@ -13,19 +13,8 @@ use McMatters\LaravelRoles\Models\Permission;
 use McMatters\LaravelRoles\Models\Role;
 use McMatters\LaravelRoles\Tests\Models\User;
 
-/**
- * Class UserRolePermissionSeeder
- *
- * @package McMatters\LaravelRoles\Tests\Database\Seeders
- */
 class UserRolePermissionSeeder extends Seeder
 {
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function run(): void
     {
         $i = 0;
@@ -66,9 +55,6 @@ class UserRolePermissionSeeder extends Seeder
         }
     }
 
-    /**
-     * @return array
-     */
     protected function getData(): array
     {
         return [

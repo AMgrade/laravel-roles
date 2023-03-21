@@ -30,35 +30,15 @@ use const false;
 use const null;
 use const true;
 
-/**
- * Trait HasRole
- *
- * @package McMatters\LaravelRoles\Traits
- */
 trait HasRole
 {
-    /**
-     * @var \Illuminate\Database\Eloquent\Collection|null
-     */
     protected ?Collection $roles = null;
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
     }
 
-    /**
-     * @param mixed $role
-     * @param bool $touch
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function attachRole($role, bool $touch = true): void
     {
         $roles = $this->parseRoles($role);
@@ -72,15 +52,6 @@ trait HasRole
         $this->flushRoles();
     }
 
-    /**
-     * @param mixed $role
-     * @param bool $touch
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function detachRole($role = null, bool $touch = true): void
     {
         if (null !== $role) {
@@ -96,15 +67,6 @@ trait HasRole
         $this->flushRoles();
     }
 
-    /**
-     * @param mixed $roles
-     * @param bool $detaching
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function syncRoles($roles, bool $detaching = true): void
     {
         if (null !== $roles) {
@@ -120,21 +82,15 @@ trait HasRole
         $this->flushRoles();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
     public function getRoles(): EloquentCollection
     {
         if (null === $this->roles) {
-            $this->roles = $this->getAttribute('roles');
+            $this->roles = $this->getRelationValue('roles');
         }
 
         return $this->roles;
     }
 
-    /**
-     * @return void
-     */
     public function flushRoles(): void
     {
         $this->unsetRelation('roles');
@@ -145,27 +101,11 @@ trait HasRole
         }
     }
 
-    /**
-     * @param mixed $role
-     *
-     * @return bool
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function hasRole($role): bool
     {
         return null !== $this->getRoles()->find($this->parseRole($role));
     }
 
-    /**
-     * @param mixed $roles
-     *
-     * @return bool
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function hasRoles($roles): bool
     {
         foreach ($this->parseRoles($roles) as $role) {
@@ -177,14 +117,6 @@ trait HasRole
         return true;
     }
 
-    /**
-     * @param mixed $roles
-     *
-     * @return bool
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     public function hasAnyRole($roles): bool
     {
         foreach ($this->parseRoles($roles) as $role) {
@@ -196,22 +128,11 @@ trait HasRole
         return false;
     }
 
-    /**
-     * @return int
-     */
     public function levelAccess(): int
     {
         return (int) ($this->getRoles()->max('level') ?: 0);
     }
 
-    /**
-     * @param int|string|\McMatters\LaravelRoles\Models\Role $role
-     *
-     * @return int
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     protected function parseRole($role): int
     {
         if (is_int($role) || is_numeric($role)) {
@@ -232,14 +153,6 @@ trait HasRole
         throw new InvalidArgumentException('Invalid role was passed');
     }
 
-    /**
-     * @param mixed $roles
-     *
-     * @return array
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     */
     protected function parseRoles($roles): array
     {
         if (is_int($roles)) {
@@ -259,7 +172,7 @@ trait HasRole
         }
 
         if (is_array($roles)) {
-            return array_map(fn($role) => $this->parseRole($role), $roles);
+            return array_map(fn ($role) => $this->parseRole($role), $roles);
         }
 
         throw new InvalidArgumentException('Invalid roles were passed');

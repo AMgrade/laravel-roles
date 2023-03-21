@@ -9,23 +9,11 @@ use McMatters\LaravelRoles\Tests\Traits\PermissionsTrait;
 
 use function range;
 
-/**
- * Class PermissionsTest
- *
- * @package McMatters\LaravelRoles\Tests
- */
 class PermissionsTest extends TestCase
 {
     use PermissionsTrait;
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testBasic()
+    public function testBasic(): void
     {
         $this->assertCount(0, $this->getUserEditor()->getAttribute('permissions'));
         $this->assertCount(3, $this->getUserEditor()->getPermissions());
@@ -43,15 +31,7 @@ class PermissionsTest extends TestCase
         $this->assertCount(10, $this->getRoleAdmin()->getPermissions());
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testTogglingPermissionInt()
+    public function testTogglingPermissionInt(): void
     {
         $user = $this->createUser();
 
@@ -111,14 +91,7 @@ class PermissionsTest extends TestCase
         $this->assertCount(1, $user->getPermissions());
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasPermissionInt()
+    public function testHasPermissionInt(): void
     {
         $this->assertTrue($this->getUserEditor()->hasPermission(1));
         $this->assertTrue($this->getUserEditor()->hasPermission(2));
@@ -187,14 +160,7 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasPermission(10));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasPermissionString()
+    public function testHasPermissionString(): void
     {
         $this->assertTrue($this->getUserEditor()->hasPermission('blog.create'));
         $this->assertTrue($this->getUserEditor()->hasPermission('blog.update'));
@@ -263,14 +229,7 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasPermission('settings.update'));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasPermissionModel()
+    public function testHasPermissionModel(): void
     {
         $this->assertTrue($this->getUserEditor()->hasPermission($this->getPermission('blog.create')));
         $this->assertTrue($this->getUserEditor()->hasPermission($this->getPermission('blog.update')));
@@ -339,14 +298,7 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasPermission($this->getPermission('settings.update')));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasPermissionsInt()
+    public function testHasPermissionsInt(): void
     {
         $this->assertTrue($this->getUserEditor()->hasPermissions(1));
         $this->assertTrue($this->getUserEditor()->hasPermissions(2));
@@ -423,14 +375,7 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasPermissions(new Collection([4, 5])));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasPermissionsString()
+    public function testHasPermissionsString(): void
     {
         $this->assertTrue($this->getUserEditor()->hasPermissions('blog.create'));
         $this->assertTrue($this->getUserEditor()->hasPermissions('blog.create|blog.update'));
@@ -502,14 +447,7 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasPermissions('settings.update'));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasPermissionsModel()
+    public function testHasPermissionsModel(): void
     {
         $this->assertTrue($this->getUserEditor()->hasPermissions($this->getPermission('blog.create')));
         $this->assertTrue($this->getUserEditor()->hasPermissions([$this->getPermission('blog.delete')]));
@@ -579,14 +517,7 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasPermissions($this->getPermission('settings.update')));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasAnyPermissionInt()
+    public function testHasAnyPermissionInt(): void
     {
         $this->assertTrue($this->getUserEditor()->hasAnyPermission(1));
         $this->assertTrue($this->getUserEditor()->hasAnyPermission([1]));
@@ -636,14 +567,7 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission(new Collection([1, 2, 3, 6, 7])));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasAnyRoleString()
+    public function testHasAnyRoleString(): void
     {
         $this->assertTrue($this->getUserEditor()->hasAnyPermission('blog.create'));
         $this->assertTrue($this->getUserEditor()->hasAnyPermission('blog.create|blog.update'));
@@ -706,14 +630,7 @@ class PermissionsTest extends TestCase
         $this->assertTrue($this->getRoleAdmin()->hasAnyPermission('settings.create|settings.update'));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasAnyPermissionModel()
+    public function testHasAnyPermissionModel(): void
     {
         $this->assertTrue($this->getUserEditor()->hasAnyPermission($this->getPermission('blog.create')));
         $this->assertTrue($this->getUserEditor()->hasAnyPermission([$this->getPermission('blog.delete')]));

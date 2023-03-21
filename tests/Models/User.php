@@ -9,20 +9,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use McMatters\LaravelRoles\Traits\HasPermission;
 use McMatters\LaravelRoles\Traits\HasRole;
 
-/**
- * Class User
- *
- * @package McMatters\LaravelRoles\Tests\Models
- */
 class User extends Authenticatable
 {
     use HasFactory;
     use HasPermission;
     use HasRole;
 
-    /**
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',

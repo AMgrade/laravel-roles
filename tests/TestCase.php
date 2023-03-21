@@ -15,21 +15,11 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 use function realpath;
 
-/**
- * Class TestCase
- *
- * @package McMatters\LaravelRoles\Tests
- */
 class TestCase extends BaseTestCase
 {
     use RolesTrait;
     use UsersTrait;
 
-    /**
-     * @return void
-     *
-     * @throws \Mockery\Exception\NoMatchingExpectationException
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -42,8 +32,6 @@ class TestCase extends BaseTestCase
 
     /**
      * @param \Illuminate\Foundation\Application $app
-     *
-     * @return void
      */
     protected function getEnvironmentSetUp($app): void
     {
@@ -61,8 +49,6 @@ class TestCase extends BaseTestCase
 
     /**
      * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
      */
     protected function getPackageProviders($app): array
     {
@@ -77,9 +63,6 @@ class TestCase extends BaseTestCase
         return [];
     }
 
-    /**
-     * @return void
-     */
     protected function setupEloquentFactory(): void
     {
         $namespace = 'McMatters\\LaravelRoles\\Tests\\Database\\Factories\\';

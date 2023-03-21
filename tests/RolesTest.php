@@ -6,22 +6,9 @@ namespace McMatters\LaravelRoles\Tests;
 
 use Illuminate\Database\Eloquent\Collection;
 
-/**
- * Class RolesTest
- *
- * @package McMatters\LaravelRoles\Tests
- */
 class RolesTest extends TestCase
 {
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasRoleInt()
+    public function testHasRoleInt(): void
     {
         $this->assertTrue($this->getUserEditor()->hasRole(1));
         $this->assertFalse($this->getUserEditor()->hasRole(2));
@@ -39,15 +26,7 @@ class RolesTest extends TestCase
         $this->assertFalse($this->getUserAdmin()->hasRole(4));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasRoleString()
+    public function testHasRoleString(): void
     {
         $this->assertTrue($this->getUserEditor()->hasRole('editor'));
         $this->assertFalse($this->getUserEditor()->hasRole('admin'));
@@ -62,15 +41,7 @@ class RolesTest extends TestCase
         $this->assertFalse($this->getUserAdmin()->hasRole('editor'));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasRoleModel()
+    public function testHasRoleModel(): void
     {
         $this->assertTrue($this->getUserEditor()->hasRole($this->getRoleEditor()));
         $this->assertFalse($this->getUserEditor()->hasRole($this->getRoleAdmin()));
@@ -85,15 +56,7 @@ class RolesTest extends TestCase
         $this->assertFalse($this->getUserAdmin()->hasRole($this->getRoleEditor()));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasRolesInt()
+    public function testHasRolesInt(): void
     {
         $this->assertTrue($this->getUserEditor()->hasRoles(1));
         $this->assertTrue($this->getUserEditor()->hasRoles([1]));
@@ -108,15 +71,7 @@ class RolesTest extends TestCase
         $this->assertTrue($this->getUserAdmin()->hasRoles(new Collection([3])));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasRolesString()
+    public function testHasRolesString(): void
     {
         $this->assertTrue($this->getUserEditor()->hasRoles('editor'));
         $this->assertTrue($this->getUserEditor()->hasRoles(['editor']));
@@ -131,15 +86,7 @@ class RolesTest extends TestCase
         $this->assertTrue($this->getUserAdmin()->hasRoles(new Collection(['admin'])));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasRolesModel()
+    public function testHasRolesModel(): void
     {
         $this->assertTrue($this->getUserEditor()->hasRoles($this->getRoleEditor()));
         $this->assertTrue($this->getUserEditor()->hasRoles([$this->getRoleEditor()]));
@@ -154,15 +101,7 @@ class RolesTest extends TestCase
         $this->assertTrue($this->getUserAdmin()->hasRoles(new Collection([$this->getRoleAdmin()])));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasAnyRoleInt()
+    public function testHasAnyRoleInt(): void
     {
         $this->assertTrue($this->getUserEditor()->hasAnyRole(1));
         $this->assertTrue($this->getUserEditor()->hasAnyRole([1]));
@@ -201,15 +140,7 @@ class RolesTest extends TestCase
         $this->assertFalse($this->getUserAdmin()->hasAnyRole(new Collection([4, 5, 6])));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testHasAnyRoleString()
+    public function testHasAnyRoleString(): void
     {
         $this->assertTrue($this->getUserEditor()->hasAnyRole('editor'));
         $this->assertTrue($this->getUserEditor()->hasAnyRole('admin|editor'));
@@ -251,15 +182,7 @@ class RolesTest extends TestCase
         $this->assertFalse($this->getUserAdmin()->hasAnyRole(new Collection(['editor', 'moderator'])));
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testTogglingRolesInt()
+    public function testTogglingRolesInt(): void
     {
         $user = $this->createUser();
 
@@ -282,15 +205,7 @@ class RolesTest extends TestCase
         $this->assertEmpty($user->getRoles());
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testTogglingRolesString()
+    public function testTogglingRolesString(): void
     {
         $user = $this->createUser();
 
@@ -343,15 +258,7 @@ class RolesTest extends TestCase
         $this->assertEmpty($user->getRoles());
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testTogglingRolesModel()
+    public function testTogglingRolesModel(): void
     {
         $user = $this->createUser();
 
@@ -379,15 +286,7 @@ class RolesTest extends TestCase
         $this->assertEmpty($user->getRoles());
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @throws \InvalidArgumentException
-     */
-    public function testLevelAccess()
+    public function testLevelAccess(): void
     {
         $this->assertEquals(1, $this->getUserEditor()->levelAccess());
         $this->assertEquals(2, $this->getUserModerator()->levelAccess());

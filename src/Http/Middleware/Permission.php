@@ -10,22 +10,8 @@ use McMatters\LaravelRoles\Exceptions\PermissionDeniedException;
 
 use const null;
 
-/**
- * Class Permission
- *
- * @package McMatters\LaravelRoles\Http\Middleware
- */
 class Permission
 {
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @param mixed $permission
-     *
-     * @return mixed
-     *
-     * @throws \McMatters\LaravelRoles\Exceptions\PermissionDeniedException
-     */
     public function handle(Request $request, Closure $next, $permission)
     {
         $user = $request->user();

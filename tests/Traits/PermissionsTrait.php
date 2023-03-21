@@ -13,20 +13,8 @@ use function is_array;
 
 use const null;
 
-/**
- * Trait PermissionsTrait
- *
- * @package McMatters\LaravelRoles\Tests\Traits
- */
 trait PermissionsTrait
 {
-    /**
-     * @param array|string $name
-     *
-     * @return \McMatters\LaravelRoles\Models\Permission
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     protected function getPermission(string $name): Permission
     {
         static $cache ;
@@ -40,13 +28,6 @@ trait PermissionsTrait
         });
     }
 
-    /**
-     * @param array|string $names
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     protected function getPermissions($names): Collection
     {
         $collection = new Collection();

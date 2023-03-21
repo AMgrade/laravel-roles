@@ -10,23 +10,9 @@ use McMatters\LaravelRoles\Exceptions\RoleDeniedException;
 
 use const null;
 
-/**
- * Class AnyRole
- *
- * @package McMatters\LaravelRoles\Http\Middleware
- */
 class AnyRole
 {
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @param mixed $roles
-     *
-     * @return mixed
-     *
-     * @throws \McMatters\LaravelRoles\Exceptions\RoleDeniedException
-     */
-    public function handle(Request $request, Closure $next, ...$roles)
+    public function handle(Request $request, Closure $next, $roles)
     {
         $user = $request->user();
 

@@ -9,32 +9,13 @@ use Illuminate\Support\Facades\DB;
 use const false;
 use const true;
 
-/**
- * Class PerformanceTest
- *
- * @package McMatters\LaravelRoles\Tests
- */
 class PerformanceTest extends TestCase
 {
-    /**
-     * @var bool
-     */
     protected bool $listenerSetup = false;
 
-    /**
-     * @var int
-     */
     protected int $queryCount = 0;
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testRolesCalling()
+    public function testRolesCalling(): void
     {
         $user = $this->createUser(); // 1
         $user->attachRole($this->getRoleEditor()); // 2, 3
@@ -46,15 +27,7 @@ class PerformanceTest extends TestCase
         $this->assertSame(4, $this->queryCount);
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \InvalidArgumentException
-     * @throws \PHPUnit\Framework\ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function testPermissionsCalling()
+    public function testPermissionsCalling(): void
     {
         $user = $this->createUser(); // 1
         $user->attachRole($this->getRoleAdmin()); // 2, 3
@@ -66,11 +39,6 @@ class PerformanceTest extends TestCase
         $this->assertSame(5, $this->queryCount);
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Mockery\Exception\NoMatchingExpectationException
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -80,9 +48,6 @@ class PerformanceTest extends TestCase
         $this->queryCount = 0;
     }
 
-    /**
-     * @return void
-     */
     protected function setupListener(): void
     {
         if (!$this->listenerSetup) {

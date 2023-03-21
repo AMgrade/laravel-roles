@@ -32,21 +32,10 @@ use const false;
 use const null;
 use const true;
 
-/**
- * Trait HasPermission
- *
- * @package McMatters\LaravelRoles\Traits
- */
 trait HasPermission
 {
-    /**
-     * @var \Illuminate\Database\Eloquent\Collection|null
-     */
     protected ?Collection $permissions = null;
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -60,14 +49,6 @@ trait HasPermission
         );
     }
 
-    /**
-     * @param mixed $permission
-     * @param bool $touch
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     public function attachPermission($permission, bool $touch = true): void
     {
         $permissions = (new EloquentCollection())
@@ -83,14 +64,6 @@ trait HasPermission
         $this->flushPermissions();
     }
 
-    /**
-     * @param mixed $permission
-     * @param bool $touch
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     public function detachPermission(
         $permission = null,
         bool $touch = true
@@ -110,14 +83,6 @@ trait HasPermission
         $this->flushPermissions();
     }
 
-    /**
-     * @param mixed $permissions
-     * @param bool $detaching
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     public function syncPermissions($permissions, bool $detaching = true): void
     {
         if (null !== $permissions) {
@@ -135,14 +100,11 @@ trait HasPermission
         $this->flushPermissions();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
     public function getPermissions(): EloquentCollection
     {
         if (null === $this->permissions) {
             /** @var \Illuminate\Database\Eloquent\Collection $permissions */
-            $permissions = $this->getAttribute('permissions');
+            $permissions = $this->getRelationValue('permissions');
 
             if (
                 $this instanceof Role ||
@@ -157,20 +119,12 @@ trait HasPermission
         return $this->permissions;
     }
 
-    /**
-     * @return void
-     */
     public function flushPermissions(): void
     {
         $this->unsetRelation('permissions');
         $this->permissions = null;
     }
 
-    /**
-     * @param mixed $permission
-     *
-     * @return bool
-     */
     public function hasPermission($permission): bool
     {
         return $this->getPermissions()->contains(
@@ -188,13 +142,6 @@ trait HasPermission
         );
     }
 
-    /**
-     * @param mixed $permissions
-     *
-     * @return bool
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     public function hasPermissions($permissions): bool
     {
         if (!$permissions = $this->parsePermissions($permissions)) {
@@ -210,13 +157,6 @@ trait HasPermission
         return true;
     }
 
-    /**
-     * @param mixed $permissions
-     *
-     * @return bool
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     public function hasAnyPermission($permissions): bool
     {
         if (!$permissions = $this->parsePermissions($permissions)) {
@@ -232,14 +172,6 @@ trait HasPermission
         return false;
     }
 
-    /**
-     * @param mixed $permissions
-     * @param bool $load
-     *
-     * @return array
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     */
     protected function parsePermissions($permissions, bool $load = false): array
     {
         if ($permissions instanceof Collection) {
@@ -298,9 +230,6 @@ trait HasPermission
         return $permissionCollection->all();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
     protected function getRolePermissions(): EloquentCollection
     {
         $isThisRole = $this instanceof Role;

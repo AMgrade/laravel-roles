@@ -9,18 +9,8 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 use function method_exists;
 
-/**
- * Class ServiceProvider
- *
- * @package McMatters\LaravelRoles
- */
 class ServiceProvider extends BaseServiceProvider
 {
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
@@ -38,15 +28,11 @@ class ServiceProvider extends BaseServiceProvider
         $this->registerBladeDirectives();
     }
 
-    /**
-     * @return void
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
     protected function registerBladeDirectives(): void
     {
         /** @var \Illuminate\View\Compilers\BladeCompiler $blade */
-        $blade = $this->app->make('view')
+        $blade = $this->app
+            ->make('view')
             ->getEngineResolver()
             ->resolve('blade')
             ->getCompiler();
@@ -72,9 +58,6 @@ class ServiceProvider extends BaseServiceProvider
         });
     }
 
-    /**
-     * @return string
-     */
     protected function configPath(): string
     {
         return method_exists($this->app, 'configPath')
