@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Tests;
+namespace AMgrade\LaravelRoles\Tests;
 
 use Illuminate\Support\Facades\DB;
 

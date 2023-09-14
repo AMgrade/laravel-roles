@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Tests\Database\Factories;
+namespace AMgrade\LaravelRoles\Tests\Database\Factories;
 
-use McMatters\LaravelRoles\Tests\Models\User;
+use AMgrade\LaravelRoles\Tests\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory

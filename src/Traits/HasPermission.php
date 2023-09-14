@@ -2,8 +2,16 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Traits;
+namespace AMgrade\LaravelRoles\Traits;
 
+use AMgrade\LaravelRoles\Events\Permission\AttachedPermission;
+use AMgrade\LaravelRoles\Events\Permission\AttachingPermission;
+use AMgrade\LaravelRoles\Events\Permission\DetachedPermission;
+use AMgrade\LaravelRoles\Events\Permission\DetachingPermission;
+use AMgrade\LaravelRoles\Events\Permission\SyncedPermissions;
+use AMgrade\LaravelRoles\Events\Permission\SyncingPermissions;
+use AMgrade\LaravelRoles\Models\Permission;
+use AMgrade\LaravelRoles\Models\Role;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,14 +19,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
-use McMatters\LaravelRoles\Events\Permission\AttachedPermission;
-use McMatters\LaravelRoles\Events\Permission\AttachingPermission;
-use McMatters\LaravelRoles\Events\Permission\DetachedPermission;
-use McMatters\LaravelRoles\Events\Permission\DetachingPermission;
-use McMatters\LaravelRoles\Events\Permission\SyncedPermissions;
-use McMatters\LaravelRoles\Events\Permission\SyncingPermissions;
-use McMatters\LaravelRoles\Models\Permission;
-use McMatters\LaravelRoles\Models\Role;
 
 use function class_uses;
 use function count;

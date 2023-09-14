@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Tests;
+namespace AMgrade\LaravelRoles\Tests;
 
+use AMgrade\LaravelRoles\Tests\Traits\PermissionsTrait;
 use Illuminate\Support\Collection;
-use McMatters\LaravelRoles\Tests\Traits\PermissionsTrait;
 
 use function range;
 

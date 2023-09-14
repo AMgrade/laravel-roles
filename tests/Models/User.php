@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Tests\Models;
+namespace AMgrade\LaravelRoles\Tests\Models;
 
+use AMgrade\LaravelRoles\Traits\HasPermission;
+use AMgrade\LaravelRoles\Traits\HasRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use McMatters\LaravelRoles\Traits\HasPermission;
-use McMatters\LaravelRoles\Traits\HasRole;
 
 class User extends Authenticatable
 {

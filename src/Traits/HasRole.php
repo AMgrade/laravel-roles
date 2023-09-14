@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Traits;
+namespace AMgrade\LaravelRoles\Traits;
 
+use AMgrade\LaravelRoles\Events\Role\AttachedRole;
+use AMgrade\LaravelRoles\Events\Role\AttachingRole;
+use AMgrade\LaravelRoles\Events\Role\DetachedRole;
+use AMgrade\LaravelRoles\Events\Role\DetachingRole;
+use AMgrade\LaravelRoles\Events\Role\SyncedRoles;
+use AMgrade\LaravelRoles\Events\Role\SyncingRoles;
+use AMgrade\LaravelRoles\Models\Role;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use InvalidArgumentException;
-use McMatters\LaravelRoles\Events\Role\AttachedRole;
-use McMatters\LaravelRoles\Events\Role\AttachingRole;
-use McMatters\LaravelRoles\Events\Role\DetachedRole;
-use McMatters\LaravelRoles\Events\Role\DetachingRole;
-use McMatters\LaravelRoles\Events\Role\SyncedRoles;
-use McMatters\LaravelRoles\Events\Role\SyncingRoles;
-use McMatters\LaravelRoles\Models\Role;
 
 use function array_map;
 use function class_uses;

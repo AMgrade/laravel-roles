@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Tests\Traits;
+namespace AMgrade\LaravelRoles\Tests\Traits;
 
+use AMgrade\LaravelRoles\Models\Permission;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use McMatters\LaravelRoles\Models\Permission;
 
 use function func_get_args;
 use function is_array;

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Tests\Database\Seeders;
+namespace AMgrade\LaravelRoles\Tests\Database\Seeders;
 
+use AMgrade\LaravelRoles\Models\Permission;
+use AMgrade\LaravelRoles\Models\Role;
+use AMgrade\LaravelRoles\Tests\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use McMatters\LaravelRoles\Models\Permission;
-use McMatters\LaravelRoles\Models\Role;
-use McMatters\LaravelRoles\Tests\Models\User;
 
 class UserRolePermissionSeeder extends Seeder
 {
@@ -28,14 +28,14 @@ class UserRolePermissionSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         foreach ($this->getData() as $role => $permissions) {
-            /** @var \McMatters\LaravelRoles\Models\Role $roleModel */
+            /** @var \AMgrade\LaravelRoles\Models\Role $roleModel */
             $roleModel = Role::query()->create([
                 'name' => $role,
                 'level' => ++$i,
             ]);
 
             foreach ($permissions as $permission) {
-                /** @var \McMatters\LaravelRoles\Models\Permission $permissionModel */
+                /** @var \AMgrade\LaravelRoles\Models\Permission $permissionModel */
                 $permissionModel = Permission::query()->create([
                     'name' => $permission,
                 ]);
@@ -43,7 +43,7 @@ class UserRolePermissionSeeder extends Seeder
                 $roleModel->attachPermission($permissionModel);
             }
 
-            /** @var \McMatters\LaravelRoles\Tests\Models\User $user */
+            /** @var \AMgrade\LaravelRoles\Tests\Models\User $user */
             $user = User::query()->create([
                 'name' => $role,
                 'email' => "{$role}@example.com",

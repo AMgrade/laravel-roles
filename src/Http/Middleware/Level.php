@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Http\Middleware;
+namespace AMgrade\LaravelRoles\Http\Middleware;
 
+use AMgrade\LaravelRoles\Exceptions\LevelAccessDeniedException;
 use Closure;
 use Illuminate\Http\Request;
-use McMatters\LaravelRoles\Exceptions\LevelAccessDeniedException;
 
 use const null;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Tests\Traits;
+namespace AMgrade\LaravelRoles\Tests\Traits;
 
+use AMgrade\LaravelRoles\Models\Role;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use McMatters\LaravelRoles\Models\Role;
 
 use const null;
 

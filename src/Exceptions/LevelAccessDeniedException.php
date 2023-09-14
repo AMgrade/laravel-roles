@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Exceptions;
+namespace AMgrade\LaravelRoles\Exceptions;
 
 use Exception;
 

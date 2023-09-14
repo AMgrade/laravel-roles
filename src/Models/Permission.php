@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace McMatters\LaravelRoles\Models;
+namespace AMgrade\LaravelRoles\Models;
 
+use AMgrade\LaravelRoles\Traits\HasRole;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Config;
-use McMatters\LaravelRoles\Traits\HasRole;
 
 use const null;
 
