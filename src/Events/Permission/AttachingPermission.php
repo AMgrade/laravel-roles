@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Events\Permission;
+namespace AMgrade\Roles\Events\Permission;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Http\Middleware;
+namespace AMgrade\Roles\Http\Middleware;
 
-use AMgrade\LaravelRoles\Exceptions\RoleDeniedException;
+use AMgrade\Roles\Exceptions\RoleDeniedException;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -12,11 +12,13 @@ use const null;
 
 class Role
 {
-    public function handle(Request $request, Closure $next, $role)
-    {
-        $user = $request->user();
-
-        if (null !== $user && $user->hasRoles($role)) {
+    public function handle(
+        Request $request,
+        Closure $next,
+        $role,
+        ?string $guard = null
+    ) {
+        if ($request->user($guard)?->hasRoles($role)) {
             return $next($request);
         }
 

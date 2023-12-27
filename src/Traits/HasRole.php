@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Traits;
+namespace AMgrade\Roles\Traits;
 
-use AMgrade\LaravelRoles\Events\Role\AttachedRole;
-use AMgrade\LaravelRoles\Events\Role\AttachingRole;
-use AMgrade\LaravelRoles\Events\Role\DetachedRole;
-use AMgrade\LaravelRoles\Events\Role\DetachingRole;
-use AMgrade\LaravelRoles\Events\Role\SyncedRoles;
-use AMgrade\LaravelRoles\Events\Role\SyncingRoles;
-use AMgrade\LaravelRoles\Models\Role;
+use AMgrade\Roles\Events\Role\AttachedRole;
+use AMgrade\Roles\Events\Role\AttachingRole;
+use AMgrade\Roles\Events\Role\DetachedRole;
+use AMgrade\Roles\Events\Role\DetachingRole;
+use AMgrade\Roles\Events\Role\SyncedRoles;
+use AMgrade\Roles\Events\Role\SyncingRoles;
+use AMgrade\Roles\Models\Role;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;

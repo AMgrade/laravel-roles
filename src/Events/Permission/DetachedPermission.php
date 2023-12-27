@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Events\Permission;
+namespace AMgrade\Roles\Events\Permission;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +14,7 @@ class DetachedPermission
 
     public ?array $permissions;
 
-    public function __construct(Model $model, array $permissions = null)
+    public function __construct(Model $model, ?array $permissions = null)
     {
         $this->model = $model;
         $this->permissions = $permissions;

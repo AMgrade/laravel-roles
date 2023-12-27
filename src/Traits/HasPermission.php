@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Traits;
+namespace AMgrade\Roles\Traits;
 
-use AMgrade\LaravelRoles\Events\Permission\AttachedPermission;
-use AMgrade\LaravelRoles\Events\Permission\AttachingPermission;
-use AMgrade\LaravelRoles\Events\Permission\DetachedPermission;
-use AMgrade\LaravelRoles\Events\Permission\DetachingPermission;
-use AMgrade\LaravelRoles\Events\Permission\SyncedPermissions;
-use AMgrade\LaravelRoles\Events\Permission\SyncingPermissions;
-use AMgrade\LaravelRoles\Models\Permission;
-use AMgrade\LaravelRoles\Models\Role;
+use AMgrade\Roles\Events\Permission\AttachedPermission;
+use AMgrade\Roles\Events\Permission\AttachingPermission;
+use AMgrade\Roles\Events\Permission\DetachedPermission;
+use AMgrade\Roles\Events\Permission\DetachingPermission;
+use AMgrade\Roles\Events\Permission\SyncedPermissions;
+use AMgrade\Roles\Events\Permission\SyncingPermissions;
+use AMgrade\Roles\Models\Permission;
+use AMgrade\Roles\Models\Role;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -66,7 +66,7 @@ trait HasPermission
 
     public function detachPermission(
         $permission = null,
-        bool $touch = true
+        bool $touch = true,
     ): void {
         if (null !== $permission) {
             $permission = (new EloquentCollection())
@@ -244,22 +244,22 @@ trait HasPermission
                 $permissionRoleTable,
                 "{$permissionRoleTable}.permission_id",
                 '=',
-                $permissionModel->getQualifiedKeyName()
+                $permissionModel->getQualifiedKeyName(),
             )
             ->join(
                 $roleModel->getTable(),
                 $roleModel->getQualifiedKeyName(),
                 '=',
-                "{$permissionRoleTable}.role_id"
+                "{$permissionRoleTable}.role_id",
             )
             ->whereIn(
                 $roleModel->getQualifiedKeyName(),
-                $isThisRole ? [$this->getKey()] : $this->getRoles()->modelKeys()
+                $isThisRole ? [$this->getKey()] : $this->getRoles()->modelKeys(),
             )
             ->orWhere(
                 "{$roleModel->getTable()}.level",
                 '<',
-                $isThisRole ? $this->getAttribute('level') : $this->levelAccess()
+                $isThisRole ? $this->getAttribute('level') : $this->levelAccess(),
             )
             ->get(["{$permissionModel->getTable()}.*"]);
     }

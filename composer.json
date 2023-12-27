@@ -21,20 +21,20 @@
     },
     "autoload": {
         "psr-4": {
-            "AMgrade\\LaravelRoles\\": "src/"
+            "AMgrade\\Roles\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AMgrade\\LaravelRoles\\Tests\\": "tests/",
-            "AMgrade\\LaravelRoles\\Tests\\Database\\Factories\\": "tests/database/factories/",
-            "AMgrade\\LaravelRoles\\Tests\\Database\\Seeders\\": "tests/database/seeders/"
+            "AMgrade\\Roles\\Tests\\": "tests/",
+            "AMgrade\\Roles\\Tests\\Database\\Factories\\": "tests/database/factories/",
+            "AMgrade\\Roles\\Tests\\Database\\Seeders\\": "tests/database/seeders/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "AMgrade\\LaravelRoles\\LaravelRolesServiceProvider"
+                "AMgrade\\Roles\\RolesServiceProvider"
             ]
         }
     }

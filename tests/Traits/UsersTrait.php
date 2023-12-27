@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Tests\Traits;
+namespace AMgrade\Roles\Tests\Traits;
 
-use AMgrade\LaravelRoles\Tests\Models\User;
+use AMgrade\Roles\Tests\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use const null;

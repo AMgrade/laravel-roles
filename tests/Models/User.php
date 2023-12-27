@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Tests\Models;
+namespace AMgrade\Roles\Tests\Models;
 
-use AMgrade\LaravelRoles\Traits\HasPermission;
-use AMgrade\LaravelRoles\Traits\HasRole;
+use AMgrade\Roles\Traits\HasPermission;
+use AMgrade\Roles\Traits\HasRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

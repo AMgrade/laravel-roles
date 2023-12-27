@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Models;
+namespace AMgrade\Roles\Models;
 
-use AMgrade\LaravelRoles\Traits\HasRole;
+use AMgrade\Roles\Traits\HasRole;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Config;

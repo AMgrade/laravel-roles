@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Events\Role;
+namespace AMgrade\Roles\Events\Role;
 
 use Illuminate\Database\Eloquent\Model;
 

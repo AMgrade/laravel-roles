@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Tests;
+namespace AMgrade\Roles\Tests;
 
 use Illuminate\Database\Eloquent\Collection;
 

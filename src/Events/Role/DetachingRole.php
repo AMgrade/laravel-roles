@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Events\Role;
+namespace AMgrade\Roles\Events\Role;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +14,7 @@ class DetachingRole
 
     public ?array $roles;
 
-    public function __construct(Model $model, array $roles = null)
+    public function __construct(Model $model, ?array $roles = null)
     {
         $this->model = $model;
         $this->roles = $roles;

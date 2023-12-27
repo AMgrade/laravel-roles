@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Http\Middleware;
+namespace AMgrade\Roles\Http\Middleware;
 
-use AMgrade\LaravelRoles\Exceptions\PermissionDeniedException;
+use AMgrade\Roles\Exceptions\PermissionDeniedException;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -12,11 +12,13 @@ use const null;
 
 class Permission
 {
-    public function handle(Request $request, Closure $next, $permission)
-    {
-        $user = $request->user();
-
-        if (null !== $user && $user->hasPermissions($permission)) {
+    public function handle(
+        Request $request,
+        Closure $next,
+        $permission,
+        ?string $guard = null,
+    ) {
+        if ($request->user($guard)?->hasPermissions($permission)) {
             return $next($request);
         }
 

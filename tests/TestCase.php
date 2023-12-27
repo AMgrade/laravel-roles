@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Tests;
+namespace AMgrade\Roles\Tests;
 
-use AMgrade\LaravelRoles\LaravelRolesServiceProvider;
-use AMgrade\LaravelRoles\Tests\Database\Seeders\UserRolePermissionSeeder;
-use AMgrade\LaravelRoles\Tests\Models\User;
-use AMgrade\LaravelRoles\Tests\Traits\RolesTrait;
-use AMgrade\LaravelRoles\Tests\Traits\UsersTrait;
+use AMgrade\Roles\RolesServiceProvider;
+use AMgrade\Roles\Tests\Database\Seeders\UserRolePermissionSeeder;
+use AMgrade\Roles\Tests\Models\User;
+use AMgrade\Roles\Tests\Traits\RolesTrait;
+use AMgrade\Roles\Tests\Traits\UsersTrait;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -52,7 +52,7 @@ class TestCase extends BaseTestCase
      */
     protected function getPackageProviders($app): array
     {
-        return [LaravelRolesServiceProvider::class];
+        return [RolesServiceProvider::class];
     }
 
     /**
@@ -65,7 +65,7 @@ class TestCase extends BaseTestCase
 
     protected function setupEloquentFactory(): void
     {
-        $namespace = 'AMgrade\\LaravelRoles\\Tests\\Database\\Factories\\';
+        $namespace = 'AMgrade\\Roles\\Tests\\Database\\Factories\\';
 
         Factory::useNamespace($namespace);
 

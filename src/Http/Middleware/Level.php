@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AMgrade\LaravelRoles\Http\Middleware;
+namespace AMgrade\Roles\Http\Middleware;
 
-use AMgrade\LaravelRoles\Exceptions\LevelAccessDeniedException;
+use AMgrade\Roles\Exceptions\LevelAccessDeniedException;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -12,11 +12,13 @@ use const null;
 
 class Level
 {
-    public function handle(Request $request, Closure $next, $level)
-    {
-        $user = $request->user();
-
-        if (null !== $user && $user->levelAccess >= $level) {
+    public function handle(
+        Request $request,
+        Closure $next,
+        int $level,
+        ?string $guard = null,
+    ) {
+        if ($request->user($guard)?->levelAccess() >= $level) {
             return $next($request);
         }
 
