@@ -17,4 +17,19 @@ return [
     'models' => [
         'user' => 'App\Models\User',
     ],
+
+    'global' => [
+        'permissions' => [
+            // Enable/disable level inheritance for permissions.
+            'use_levels' => true,
+        ],
+    ],
+
+    'roles' => [
+        // List of roles.
+    ],
+
+    'permissions' => [
+        // List of permissions.
+    ],
 ];

@@ -238,6 +238,7 @@ trait HasPermission
         $roleModel = $isThisRole ? $this : new Role();
 
         $permissionRoleTable = Config::get('roles.tables.permission_role');
+        $useLevels = Config::get('roles.global.permissions.use_levels');
 
         return Permission::query()
             ->join(
@@ -252,15 +253,20 @@ trait HasPermission
                 '=',
                 "{$permissionRoleTable}.role_id",
             )
-            ->whereIn(
-                $roleModel->getQualifiedKeyName(),
-                $isThisRole ? [$this->getKey()] : $this->getRoles()->modelKeys(),
-            )
-            ->orWhere(
-                "{$roleModel->getTable()}.level",
-                '<',
-                $isThisRole ? $this->getAttribute('level') : $this->levelAccess(),
-            )
+            ->where(function ($q) use ($roleModel, $isThisRole, $useLevels) {
+                $q->whereIn(
+                    $roleModel->getQualifiedKeyName(),
+                    $isThisRole ? [$this->getKey()] : $this->getRoles()->modelKeys(),
+                );
+
+                if ($useLevels) {
+                    $q->orWhere(
+                        "{$roleModel->getTable()}.level",
+                        '<',
+                        $isThisRole ? $this->getAttribute('level') : $this->levelAccess(),
+                    );
+                }
+            })
             ->get(["{$permissionModel->getTable()}.*"]);
     }
 }
